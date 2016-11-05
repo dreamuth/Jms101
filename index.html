@@ -6,8 +6,10 @@
 
 		<title>Java Message Service (JMS) 101</title>
 
+		<link rel="stylesheet" href="css/base.css">
 		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/black.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/beige.css">
+		<!-- <link rel="stylesheet" href="reveal.js/css/theme/league.css"> -->
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
@@ -24,20 +26,152 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section
+				<!-- <section
 					id="Intro"
 					data-markdown="markdown/Intro.md"
 					data-separator="^\n\n"
 					data-vertical="^\n"
 					data-notes="^Note:"
-				></section>
-<!-- 				<section
-					id="demo"
-					data-markdown="markdown/demo.md"
-					data-separator="^\n\n\n"
-					data-vertical="^\n\n"
-					data-notes="^Note:"
 				></section> -->
+				<section>
+					<div class="animate">
+						<svg width="1000", height="800">
+						  <rect x="20" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
+							<rect x="700" y="100" rx="10" ry="10" width="100" height="60" class="client"/>
+							<rect x="700" y="500" rx="10" ry="10" width="100" height="60" class="client"/>
+							<line x1="120" y1="330" x2="120" y2="330" class="line1" id="l1"/>
+							<animate xlink:href="#l1"
+			           attributeName="x2"
+			           from="120"
+			           to="450"
+			           dur="2s"
+			           begin="infinite"
+			           fill="freeze"
+			           id="gCircAnim"/>
+							<ellipse
+								 style="fill:#ff0000;fill-rule:evenodd;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+								 id="path4198"
+								 cx="350"
+								 cy="330"
+								 rx="20"
+								 ry="40" />
+
+						</svg>
+					</div>
+				</section>
+				<section>
+					<h1>Animated SVG</h1>
+					<div class="animate" data-svg-src="BPMN.svg">
+						<svg>
+							<!-- <circle opacity="0" cx="75" cy="145" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
+								<animate class="fragment" data-reverse="reverse0" begin="indefinite" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze" repeatCount="1" />
+								<animate id="reverse0" begin="indefinite" attributeName="opacity" to="0" from="1" dur="0.1s" fill="freeze" repeatCount="1" />
+
+								<animateTransform class="fragment" data-reverse="reverse1" attributeName="transform" begin="indefinite" dur="1.15s" type="translate" from="0 0" to="115 0" fill="freeze" />
+								<animateTransform id="reverse1" attributeName="transform" begin="indefinite" dur="0.01s" type="translate" from="115 0" to="0 0" fill="freeze" />
+
+								<animateTransform id="step2" class="fragment" data-reverse="reverse2" attributeName="transform" begin="indefinite" dur="1.35s" type="translate" from="115 0" to="250 0" fill="freeze" />
+								<animateTransform id="step2b" attributeName="transform" begin="step2.end" dur="0.8s" type="translate" from="250 0" to="250 -80" fill="freeze" />
+								<animateTransform attributeName="transform" begin="step2b.end" dur="1.65s" type="translate" from="250 -80" to="415 -80" fill="freeze" />
+
+								<animateTransform id="reverse2" attributeName="transform" begin="indefinite" dur="0.01s" type="translate" from="415 -80" to="115 0" fill="freeze" />
+
+								<animateTransform id="step3" class="fragment" data-reverse="reverse3" attributeName="transform" begin="indefinite" dur="1.6s" type="translate" from="415 -80" to="575 -80" fill="freeze" />
+								<animateTransform id="step3b" attributeName="transform" begin="step3.end" dur="0.8s" type="translate" from="575 -80" to="575 0" fill="freeze" />
+								<animateTransform attributeName="transform" begin="step3b.end" dur="0.9s" type="translate" from="575 0" to="665 0" fill="freeze" />
+
+								<animateTransform id="reverse3" attributeName="transform" begin="indefinite" dur="0.01s" type="translate" from="665 0" to="415 -80" fill="freeze" />
+
+								<animate class="fragment" data-reverse="reverse4" begin="indefinite" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" repeatCount="1" />
+								<animate id="reverse4" begin="indefinite" attributeName="opacity" to="1" from="0" dur="0.01s" fill="freeze" repeatCount="1" />
+							</circle> -->
+							<circle id="msg1" cx="75.5" cy="145" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
+							<!-- <circle id="msg2" cx="326" cy="145" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000"> -->
+							<!-- <circle id="msg2" cx="326" cy="66" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000"> -->
+							<animateTransform from="0 0" to="250 0" dur="2s" id="step1" class="fragment" begin="indefinite; step5.end"  attributeName="transform" type="translate" fill="freeze"/>
+							<animateTransform from="250 0" to="250 -80" dur="1s" id="step2" begin="step1.end" attributeName="transform" type="translate" fill="freeze"/>
+							<animateTransform from="250 -80" to="575 -80" dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/>
+							<animate attributeName="r"
+								 from="10"
+								 to="20"
+								 dur="2s"
+								 begin="step3.end"
+								 fill="freeze"
+								 id="step4"/>
+								 <animate attributeName="r"
+	 								 from="20"
+	 								 to="10"
+	 								 dur="2s"
+	 								 begin="step4.end"
+	 								 fill="freeze"
+	 								 id="step5"/>
+
+							 <line x1="20" y1="20" x2="20" y2="20" class="line1" id="l2"/>
+	 							<animate xlink:href="#l2"
+	 			           attributeName="x2"
+	 			           from="20"
+	 			           to="450"
+	 			           dur="3s"
+	 			           begin="step2.end"
+	 			           fill="freeze"
+	 			           id="l2ani"/>
+
+
+							<!-- <animateTransform
+								class="fragment"
+								repeatCount="indefinite"
+								attributeName="transform"
+								begin="indefinite"
+								dur="2s"
+								type="translate"
+								from="0 0" to="250 0"
+								fill="freeze" /> -->
+
+								<!-- <animateTransform
+									class="fragment"
+									data-reverse="reverse1"
+									attributeName="transform"
+									begin="indefinite"
+									dur="1.15s"
+									type="translate"
+									from="0 0" to="115 0"
+									fill="freeze" /> -->
+
+							<!-- <animateTransform
+								id="reverse1"
+								attributeName="transform"
+								begin="indefinite"
+								dur="0.01s"
+								type="translate"
+								from="115 0"
+								to="0 0"
+								fill="freeze" /> -->
+						  <!-- <animate
+						           xlink:href="#msg1"
+						           attributeName="x"
+						           from="50"
+						           to="425"
+						           dur="5s"
+						           begin="0s"
+						           repeatCount="indefinite"
+						           fill="freeze"
+						           id="msg1-anim"/> -->
+
+
+						</svg>
+					</div>
+				</section>
+
+				<section>
+					<div class="animate" data-svg-src="topic2.svg">
+						<svg>
+							<circle id="msg2" cx="200" cy="353" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
+							<animateTransform from="200 353" to="400 352" dur="3s" id="bstep1" class="fragment" begin="indefinite" attributeName="transform" type="translate" fill="freeze"/>
+							<!-- <animateTransform from="250 0" to="250 -80" dur="1s" id="step2" begin="step1.end" attributeName="transform" type="translate" fill="freeze"/>
+							<animateTransform from="250 -80" to="575 -80" dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/> -->
+						</svg>
+					</div>
+				</section>
 			</div>
 		</div>
 
@@ -48,11 +182,47 @@
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+				anything: [
+					{className: "animate",  initialize: (function(container, options){
+						Reveal.addEventListener( 'fragmentshown', function( event ) {
+							if (typeof event.fragment.beginElement === "function" ) {
+								event.fragment.beginElement();
+							}
+						});
+						Reveal.addEventListener( 'fragmenthidden', function( event ) {
+							if (event.fragment.hasAttribute('data-reverse') ) {
+								var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+								if ( reverse && typeof reverse.beginElement === "function" ) {
+									reverse.beginElement();
+								}
+							}
+						});
+						if ( container.getAttribute("data-svg-src") ) {
+							var xhr = new XMLHttpRequest();
+							xhr.onload = function() {
+								if (xhr.readyState === 4) {
+									var svg = container.querySelector('svg');
+										container.removeChild( svg );
+									container.innerHTML = xhr.responseText + container.innerHTML;
+									if ( svg ) {
+										container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+									}
+								}
+								else {
+									console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+								}
+							};
+							xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+							xhr.send();
+						}
+					}) },
+				],
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'reveal.js/plugin/markdown/marked.js' },
 					{ src: 'reveal.js/plugin/markdown/markdown.js' },
+					{ src: 'reveal.js/plugin/anything/anything.js' },
 					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
 					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
