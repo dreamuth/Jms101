@@ -1,11 +1,11 @@
 rect.client {
-  stroke: #FF0000;
-  fill:   #f4843f;
+  stroke: #7D3C0F;
+  fill:   #EB701D;
   stroke-width: 2;
-  opacity: 0.5;
+  opacity: 1;
 }
 
-line.line1 {
-  stroke: #FF0000;
+line.solidLine {
+  stroke: #EB701D;
   stroke-width: 2;
 }
