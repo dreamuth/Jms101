@@ -1,199 +1,224 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Java Message Service (JMS) 101</title>
+    <title>Java Message Service (JMS) 101</title>
 
-		<link rel="stylesheet" href="css/base.css">
-		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/beige.css">
-		<!-- <link rel="stylesheet" href="reveal.js/css/theme/league.css"> -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/beige.css">
+    <!-- <link rel="stylesheet" href="reveal.js/css/theme/league.css"> -->
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<!-- <section
-					id="Intro"
-					data-markdown="markdown/Intro.md"
-					data-separator="^\n\n"
-					data-vertical="^\n"
-					data-notes="^Note:"
-				></section> -->
-				<section>
-					<div class="animate">
-						<svg width="1000", height="800">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- <section
+          id="Intro"
+          data-markdown="markdown/Intro.md"
+          data-separator="^\n\n"
+          data-vertical="^\n"
+          data-notes="^Note:"
+        ></section> -->
+        <section>
+          <div class="animate">
+            <svg width="1000", height="800">
 
-							<!-- Producer -->
-						  <rect id="producer1" x="20" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
+              <!-- Producer -->
+              <rect id="producer1" x="20" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
 
-							<!-- Consumers -->
-							<rect x="701" y="70" rx="10" ry="10" width="100" height="60" class="client"/>
-							<rect x="701" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
-							<rect x="701" y="530" rx="10" ry="10" width="100" height="60" class="client"/>
+              <!-- Consumers -->
+              <rect x="701" y="70" rx="10" ry="10" width="100" height="60" class="client"/>
+              <rect x="701" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
+              <rect x="701" y="530" rx="10" ry="10" width="100" height="60" class="client"/>
 
-							<!-- Broker -->
-							<path d="M 250 280 q -25 50 0 100" stroke="#7D3C0F" stroke-width="2" fill="#EB701D" />
-							<rect x="250" y="280" width="200" height="100" fill="#EB701D"/>
-							<line x1="250" y1="280" x2="450" y2="280" style="stroke:#7D3C0F;stroke-width:2" />
-							<line x1="250" y1="380" x2="450" y2="380" style="stroke:#7D3C0F;stroke-width:2" />
-							<ellipse cx="450" cy="330" rx="20" ry="50" style="fill:#F1975B;stroke:#7D3C0F;stroke-width:2" />
-							<line x1="250" y1="282" x2="250" y2="378" style="stroke:#EB701D;stroke-width:2" />
+              <!-- Broker -->
+              <path d="M 250 280 q -25 50 0 100" stroke="#7D3C0F" stroke-width="2" fill="#EB701D" />
+              <rect x="250" y="280" width="200" height="100" fill="#EB701D"/>
+              <line x1="250" y1="280" x2="450" y2="280" style="stroke:#7D3C0F;stroke-width:2" />
+              <line x1="250" y1="380" x2="450" y2="380" style="stroke:#7D3C0F;stroke-width:2" />
+              <ellipse cx="450" cy="330" rx="20" ry="50" style="fill:#F1975B;stroke:#7D3C0F;stroke-width:2" />
+              <line x1="250" y1="282" x2="250" y2="378" style="stroke:#EB701D;stroke-width:2" />
 
-							<!-- Consumer1 to Broker Connection -->
-							<line x1="700" y1="100" x2="700" y2="100" class="solidLine" id="C1ToBrLine" opacity="0" style="stroke-dasharray: 10">
-								<animate class="fragment" begin="indefinite;" id="C1ToBrLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animate begin="C1ToBrLineOpa.end" attributeName="x2" from="700" to="450" dur="2s" fill="freeze" repeatCount="none"/>
-								<animate begin="C1ToBrLineOpa.end" attributeName="y2" from="100" to="330" dur="2s" fill="freeze" repeatCount="none"/>
-							</line>
-							<path d="M 700,100 l -4,-4 l -4,12 l 12,-4 z" id="C2ToBrArrow" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-								<animate begin="C1ToBrLineOpa.end" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animateTransform to="-240 220" dur="2s" begin="C1ToBrLineOpa.end" attributeName="transform" type="translate" fill="freeze"/>
-							</path>
+              <!-- Consumer1 to Broker Connection -->
+              <line x1="700" y1="100" x2="700" y2="100" class="solidLine" id="C1ToBrLine" opacity="0" style="stroke-dasharray: 10">
+                <animate class="fragment" begin="indefinite" id="start" attributeName="opacity" from="0" to="0" dur="0.1s" fill="freeze"/>
+                <animate begin="start.end; RC1WorkOpa.end" id="C1ToBrLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animate begin="start.end; RC1WorkOpa.end" id="C1ToBrLineMove1" attributeName="x2" from="700" to="450" dur="2s" fill="freeze" repeatCount="none"/>
+                <animate begin="start.end; RC1WorkOpa.end" attributeName="y2" from="100" to="330" dur="2s" fill="freeze" repeatCount="none"/>
+                <animate begin="msg1Move3.end" id="RC1ToBrLine" attributeName="x2" from="450" to="700" dur="2s" fill="freeze" repeatCount="none"/>
+                <animate begin="msg1Move3.end" attributeName="y2" from="330" to="100" dur="2s" fill="freeze" repeatCount="none"/>
+                <animate begin="RC1ToBrLine.end" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze"/>
+              </line>
+              <path d="M 700,100 l -4,-4 l -4,12 l 12,-4 z" id="C2ToBrArrow" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+                <animate begin="start.end; RC1WorkOpa.end" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animateTransform to="-240 220" dur="2s" begin="start.end; RC1WorkOpa.end" attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform to="0 0" dur="2s" begin="msg1Move3.end" attributeName="transform" type="translate" fill="freeze"/>
+                <animate begin="RC1ToBrLine.end" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze"/>
+              </path>
+              <image xlink:href="image/settings.svg" x="760" y="80" height="20px" width="20px" opacity="0">
+                <animate begin="msg1Move3.end" id="C1WorkOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animateTransform attributeName="transform" begin="C1WorkOpa.end" id="C1WorkRotate" dur="4s" type="rotate" from="0 770 90" to="360 770 90" repeatCount="2"/>
+                <animate begin="C1WorkRotate.end" id="RC1WorkOpa" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze"/>
+              </image>
 
-							<!-- Consumer2 to Broker Connection -->
-							<line x1="700" y1="330" x2="700" y2="330" class="solidLine" id="C2ToBrLine" opacity="0" style="stroke-dasharray: 10">
-								<animate begin="C1ToBrLineOpa.end" id="C2ToBrLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animate begin="C2ToBrLineOpa.end" id="C2ToBrLineMove" attributeName="x2" from="700" to="450" dur="2s" fill="freeze"/>
-							</line>
-							<path d="M 700,330 l 0,-5 l -10,5 l 10,5 z" id="C2ToBrArrow" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-								<animate begin="C1ToBrLineOpa.end" id="C2ToBrArrowOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animateTransform to="-237 0" dur="2s" begin="C1ToBrLineOpa.end" attributeName="transform" type="translate" fill="freeze"/>
-							</path>
+              <!-- Consumer2 to Broker Connection -->
+              <line x1="700" y1="330" x2="700" y2="330" class="solidLine" id="C2ToBrLine" opacity="0" style="stroke-dasharray: 10">
+                <animate begin="start.end" id="C2ToBrLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animate begin="C2ToBrLineOpa.end" id="C2ToBrLineMove" attributeName="x2" from="700" to="450" dur="2s" fill="freeze"/>
+              </line>
+              <path d="M 700,330 l 0,-5 l -10,5 l 10,5 z" id="C2ToBrArrow" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+                <animate begin="start.end" id="C2ToBrArrowOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animateTransform to="-237 0" dur="2s" begin="start.end" attributeName="transform" type="translate" fill="freeze"/>
+              </path>
 
-							<!-- Consumer3 to Broker Connection -->
-							<line x1="700" y1="560" x2="700" y2="560" class="solidLine" id="C3ToBrLine" opacity="0" style="stroke-dasharray: 10">
-								<animate begin="C1ToBrLineOpa.end" id="C3ToBrLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animate begin="C3ToBrLineOpa.end" id="C3ToBrLineMove1" attributeName="x2" from="700" to="450" dur="2s" fill="freeze"/>
-								<animate begin="C3ToBrLineOpa.end" id="C3ToBrLineMove2" attributeName="y2" from="560" to="330" dur="2s" fill="freeze"/>
-							</line>
-							<path d="M 700,560 l -4,4 l -4,-12 l 12,4 z" id="C3ToBrArrow" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-								<animate begin="C1ToBrLineOpa.end" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animateTransform to="-240 -220" dur="2s" begin="C1ToBrLineOpa.end" id="mytest" attributeName="transform" type="translate" fill="freeze"/>
-							</path>
+              <!-- Consumer3 to Broker Connection -->
+              <line x1="700" y1="560" x2="700" y2="560" class="solidLine" id="C3ToBrLine" opacity="0" style="stroke-dasharray: 10">
+                <animate begin="start.end" id="C3ToBrLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animate begin="C3ToBrLineOpa.end" id="C3ToBrLineMove1" attributeName="x2" from="700" to="450" dur="2s" fill="freeze"/>
+                <animate begin="C3ToBrLineOpa.end" id="C3ToBrLineMove2" attributeName="y2" from="560" to="330" dur="2s" fill="freeze"/>
+              </line>
+              <path d="M 700,560 l -4,4 l -4,-12 l 12,4 z" id="C3ToBrArrow" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+                <animate begin="start.end" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animateTransform to="-240 -220" dur="2s" begin="start.end" id="mytest" attributeName="transform" type="translate" fill="freeze"/>
+              </path>
 
-							<!-- Producer to Broker connection -->
-							<line x1="121" y1="330" x2="121" y2="330" class="solidLine" id="l1" opacity="0">
-								<animate begin="C3ToBrLineMove2.end" id="aniProdToBrokerLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animate begin="aniProdToBrokerLineOpa.end" id="aniProdToBrokerLine" attributeName="x2" from="121" to="228" dur="1s" fill="freeze"/>
-							</line>
-							<polygon points="121,330 121,325 131,330 121,335 121,330" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-								<animate begin="aniProdToBrokerLineOpa.begin" id="aniProdToBrokerArrowOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
-								<animate begin="aniProdToBrokerArrowOpa.end" id="aniProdToBrokerArrow" attributeName="points" from"121,330 121,325 131,330 121,335 121,330" to="228,330 228,325 238,330 228,335 228,330" dur="1s" fill="freeze"/>
-							</polygon>
+              <!-- Producer to Broker connection -->
+              <line x1="121" y1="330" x2="121" y2="330" class="solidLine" id="P1ToBrLine" opacity="0">
+                <animate begin="C1ToBrLineMove1.end" id="P1ToBrLineOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animate begin="P1ToBrLineOpa.end" id="P1ToBrLineMove" attributeName="x2" from="121" to="228" dur="1s" fill="freeze"/>
+                <animate begin="msg1Move1.end" id="RP1ToBrLineMove" attributeName="x2" from="228" to="121" dur="1s" fill="freeze"/>
+                <animate begin="RP1ToBrLineMove.end" id="RP1ToBrLineOpa" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze"/>
+              </line>
+              <path d="M 121,330 l 0,-5 l 10,5 l -10,5 z" id="P1ToBrArrow" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+                <animate begin="C1ToBrLineMove1.end" id="P1ToBrArrowOpa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animateTransform to="107 0" dur="1s" begin="P1ToBrArrowOpa.end" attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform to="0 0" dur="1s" begin="msg1Move1.end" attributeName="transform" type="translate" fill="freeze"/>
+                <animate begin="RP1ToBrLineMove.end" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze"/>
+              </path>
 
-						</svg>
-					</div>
-				</section>
-				<section>
-					<div class="animate" data-svg-src="topic2.svg">
-						<svg>
-							<!-- Producer to Broker connection -->
-							<!-- <line x1="221" y1="343" x2="400" y2="343" class="line1" id="l1"> -->
-								<!-- <animate class="fragment" begin="indefinite; step1.begin" id="step1" attributeName="x2" from="120" to="300" dur="3s" fill="freeze"/> -->
-							<!-- </line>
-							<polygon points="221,330 120,325 130,330 120,335 120,330" style="fill:red;stroke:red;stroke-width:1" /> -->
+              <!-- Message #1 -->
+              <circle id="msg1" cx="100" cy="330" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+                <animate begin="P1ToBrLineMove.end" id="Msg1Opa" attributeName="opacity" from="0" to="1" dur="0.1s" fill="freeze"/>
+                <animateTransform from="0 0" to="165 0" dur="2s" id="msg1Move1" begin="Msg1Opa.end" attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform from="165 0" to="350 0" dur="1.6s" id="msg1Move2" begin="msg1Move1.end" attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform from="350 0" to="620 -245" dur="2.5s" id="msg1Move3" begin="msg1Move2.end" attributeName="transform" type="translate" fill="freeze"/>
+                <animate begin="msg1Move3.end" id="RMsg1Opa" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze"/>
+              </circle>
 
-							<!-- Broker -->
-							<!-- <path d="M 100 100 q -25 50 0 100" stroke="blue" stroke-width="2" fill="red" />
-							<rect x="100" y="100" width="300" height="100" fill="red"/>
-							<line x1="100" y1="100" x2="400" y2="100" style="stroke:rgb(0,0,255);stroke-width:2" />
-							<line x1="100" y1="200" x2="400" y2="200" style="stroke:rgb(0,0,255);stroke-width:2" />
-							<ellipse cx="400" cy="150" rx="20" ry="50" style="fill:red;stroke:blue;stroke-width:2" /> -->
 
-							<!-- Message #1 -->
-							<!-- <circle id="msg1" cx="200" cy="353" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
-								<animateTransform from="0 0" 			to="215 0" 		dur="1s" id="step1" class="fragment" begin="indefinite; step3.end"  attributeName="transform" type="translate" fill="freeze"/>
-								<animateTransform from="215 0" 		to="435 0" 		dur="1s" id="step2" class="fragment" begin="step1.end"  attributeName="transform" type="translate" fill="freeze"/>
-								<animateTransform from="435 0" 		to="630 -175" dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/>
-							</circle>
-							<circle id="msg2" cx="200" cy="353" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
-								<animateTransform from="0 0" 			to="215 0" 		dur="1s" id="step1" class="fragment" begin="indefinite; step3.end; step1.begin"  attributeName="transform" type="translate" fill="freeze"/>
-								<animateTransform from="215 0" 		to="435 0" 		dur="1s" id="step2" class="fragment" begin="step1.end"  attributeName="transform" type="translate" fill="freeze"/>
-								<animateTransform from="435 0" 		to="630 175" 	dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/>
-							</circle> -->
-						</svg>
-					</div>
-				</section>
+            </svg>
+          </div>
+        </section>
+        <section>
+          <div class="animate" data-svg-src="topic2.svg">
+            <svg>
+              <!-- Producer to Broker connection -->
+              <!-- <line x1="221" y1="343" x2="400" y2="343" class="line1" id="l1"> -->
+                <!-- <animate class="fragment" begin="indefinite; step1.begin" id="step1" attributeName="x2" from="120" to="300" dur="3s" fill="freeze"/> -->
+              <!-- </line>
+              <polygon points="221,330 120,325 130,330 120,335 120,330" style="fill:red;stroke:red;stroke-width:1" /> -->
 
-				<!-- <section>
-					<div class="animate" data-svg-src="topic2.svg">
-						<svg>
-							<circle id="msg2" cx="200" cy="353" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
-							<animateTransform from="200 353" to="400 352" dur="3s" id="bstep1" class="fragment" begin="indefinite" attributeName="transform" type="translate" fill="freeze"/>
-							<animateTransform from="250 0" to="250 -80" dur="1s" id="step2" begin="step1.end" attributeName="transform" type="translate" fill="freeze"/>
-							<animateTransform from="250 -80" to="575 -80" dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/>
-						</svg>
-					</div>
-				</section> -->
-			</div>
-		</div>
+              <!-- Broker -->
+              <!-- <path d="M 100 100 q -25 50 0 100" stroke="blue" stroke-width="2" fill="red" />
+              <rect x="100" y="100" width="300" height="100" fill="red"/>
+              <line x1="100" y1="100" x2="400" y2="100" style="stroke:rgb(0,0,255);stroke-width:2" />
+              <line x1="100" y1="200" x2="400" y2="200" style="stroke:rgb(0,0,255);stroke-width:2" />
+              <ellipse cx="400" cy="150" rx="20" ry="50" style="fill:red;stroke:blue;stroke-width:2" /> -->
 
-		<script src="reveal.js/lib/js/head.min.js"></script>
-		<script src="reveal.js/js/reveal.js"></script>
+              <!-- Message #1 -->
+              <!-- <circle id="msg1" cx="200" cy="353" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
+                <animateTransform from="0 0"      to="215 0"    dur="1s" id="step1" class="fragment" begin="indefinite; step3.end"  attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform from="215 0"    to="435 0"    dur="1s" id="step2" class="fragment" begin="step1.end"  attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform from="435 0"    to="630 -175" dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/>
+              </circle>
+              <circle id="msg2" cx="200" cy="353" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
+                <animateTransform from="0 0"      to="215 0"    dur="1s" id="step1" class="fragment" begin="indefinite; step3.end; step1.begin"  attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform from="215 0"    to="435 0"    dur="1s" id="step2" class="fragment" begin="step1.end"  attributeName="transform" type="translate" fill="freeze"/>
+                <animateTransform from="435 0"    to="630 175"  dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/>
+              </circle> -->
+            </svg>
+          </div>
+        </section>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
-				anything: [
-					{className: "animate",  initialize: (function(container, options){
-						Reveal.addEventListener( 'fragmentshown', function( event ) {
-							if (typeof event.fragment.beginElement === "function" ) {
-								event.fragment.beginElement();
-							}
-						});
-						Reveal.addEventListener( 'fragmenthidden', function( event ) {
-							if (event.fragment.hasAttribute('data-reverse') ) {
-								var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
-								if ( reverse && typeof reverse.beginElement === "function" ) {
-									reverse.beginElement();
-								}
-							}
-						});
-						if ( container.getAttribute("data-svg-src") ) {
-							var xhr = new XMLHttpRequest();
-							xhr.onload = function() {
-								if (xhr.readyState === 4) {
-									var svg = container.querySelector('svg');
-										container.removeChild( svg );
-									container.innerHTML = xhr.responseText + container.innerHTML;
-									if ( svg ) {
-										container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
-									}
-								}
-								else {
-									console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
-								}
-							};
-							xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
-							xhr.send();
-						}
-					}) },
-				],
+        <!-- <section>
+          <div class="animate" data-svg-src="topic2.svg">
+            <svg>
+              <circle id="msg2" cx="200" cy="353" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000">
+              <animateTransform from="200 353" to="400 352" dur="3s" id="bstep1" class="fragment" begin="indefinite" attributeName="transform" type="translate" fill="freeze"/>
+              <animateTransform from="250 0" to="250 -80" dur="1s" id="step2" begin="step1.end" attributeName="transform" type="translate" fill="freeze"/>
+              <animateTransform from="250 -80" to="575 -80" dur="2s" id="step3" begin="step2.end" attributeName="transform" type="translate" fill="freeze"/>
+            </svg>
+          </div>
+        </section> -->
+      </div>
+    </div>
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'reveal.js/plugin/markdown/marked.js' },
-					{ src: 'reveal.js/plugin/markdown/markdown.js' },
-					{ src: 'reveal.js/plugin/anything/anything.js' },
-					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
-					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <script src="reveal.js/lib/js/head.min.js"></script>
+    <script src="reveal.js/js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        anything: [
+          {className: "animate",  initialize: (function(container, options){
+            Reveal.addEventListener( 'fragmentshown', function( event ) {
+              if (typeof event.fragment.beginElement === "function" ) {
+                event.fragment.beginElement();
+              }
+            });
+            Reveal.addEventListener( 'fragmenthidden', function( event ) {
+              if (event.fragment.hasAttribute('data-reverse') ) {
+                var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+                if ( reverse && typeof reverse.beginElement === "function" ) {
+                  reverse.beginElement();
+                }
+              }
+            });
+            if ( container.getAttribute("data-svg-src") ) {
+              var xhr = new XMLHttpRequest();
+              xhr.onload = function() {
+                if (xhr.readyState === 4) {
+                  var svg = container.querySelector('svg');
+                    container.removeChild( svg );
+                  container.innerHTML = xhr.responseText + container.innerHTML;
+                  if ( svg ) {
+                    container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+                  }
+                }
+                else {
+                  console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+                }
+              };
+              xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+              xhr.send();
+            }
+          }) },
+        ],
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'reveal.js/plugin/markdown/marked.js' },
+          { src: 'reveal.js/plugin/markdown/markdown.js' },
+          { src: 'reveal.js/plugin/anything/anything.js' },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true },
+          { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
