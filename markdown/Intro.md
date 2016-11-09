@@ -1,13 +1,17 @@
-## Java Message Service (JMS) 101
-#### Uttran Ishtalingam
+### Java Message Service (JMS) 101
+###### Uttran Ishtalingam
 
 
 ### What is JMS
-This specification describes the objectives and functionality of the Java Message Service (JMS).
+> This specification describes the objectives and functionality of the Java Message Service (JMS).
 
-JMS provides a common way for Java programs to create, send, receive and read an enterprise messaging system’s messages
 
-Enterprise messaging is that messages are delivered **asynchronously** from one system to others over a network
+### What is JMS
+> JMS provides a common way for Java programs to create, send, receive and read an enterprise messaging system’s messages
+
+
+### What is JMS
+> Enterprise messaging is that messages are delivered **asynchronously** from one system to others over a network
 
 Note:
 sender is not required to wait for the message to be received
@@ -119,11 +123,41 @@ There is no coupling of the producers to the consumers. Receivers and senders ca
 
 With the p2p messaging model, the p2p receiver can either push or pull messages, depending on whether it uses the asynchronous onMessage() callback or a synchronous receive() method.
 
+
+
+#### Point To Point Messaging
+## async fire-and-forget
+![](https://www.safaribooksonline.com/library/view/java-message-service/9780596802264/httpatomoreillycomsourceoreillyimages296952.png)
+
+
+### async request/reply
+![](https://www.safaribooksonline.com/library/view/java-message-service/9780596802264/httpatomoreillycomsourceoreillyimages296954.png)
+
+
 ## Publish and Subscribe
 Zero or more consumers will receive the message.
 The subscriber has to remain continuously active to receive messages, unless it has established a durable subscription. In that case, messages published while the subscriber is not connected will be redistributed whenever it reconnects.
 
 Durable subscribers, on the other hand, will receive a copy of every message published, even if they are “offline” when the message is published.
+
+
+Messages are exchanged through a virtual channel called a topic.
+
+Each message is delivered to multiple message consumers, called subscribers. There are many types of subscribers, including durable, nondurable, and dynamic. These subscriber types are described later in this chapter.
+
+The publisher generally does not know and is not aware of which subscribers are receiving the topic messages.
+
+Messages are pushed to consumers, which means that consumers are delivered messages without having to request them. Messages are exchanged through a virtual channel called a topic. A topic is a destination where producers can publish, and subscribers can consume, messages. Messages delivered to a topic are automatically pushed to all qualified consumers.
+
+As in enterprise messaging in general, there is no coupling of the producers to the consumers. Subscribers and publishers can be added dynamically at runtime, which allows the system to grow or shrink in complexity over time.
+
+Every client that subscribes to a topic receives its own copy of messages published to that topic. A single message produced by one publisher may be copied and distributed to hundreds or even thousands of subscribers.
+
+
+
+## What is durable subscriber?
+
+
 
 ## Connection
 * JNDI Support
@@ -174,12 +208,18 @@ Properties act like additional headers that can be assigned to a message. They a
 messages can carry properties that can be defined and set by the JMS client. JMS consumers can choose to receive messages based on the values of certain headers and properties, using a special filtering mechanism called message selectors.
 
 ### Payload
-
+Object, Bytes, Streams
 
 ## Message persistence
+ The messages may be stored centrally (as is the case with centralized architectures) or locally, with each sending or receiving client (the solution used by decentralized architectures). While some vendors may still use a flat-file storage mechanism, most vendors use a database. Some may also use an intelligent combination of both. The forwarding mechanism is responsible for retrieving messages from storage and subsequently routing and delivering them.
 
 
 ## Message Filtering
+### Message Selectors
+When message selectors are used, the consumer will receive only messages that apply to the specified filter
+
+When a JMS consumer declares a message selector for a particular destination, the selector is applied only to messages delivered to that consumer. Every JMS client can have a different selector specified for each of its consumers.
+
 
 
 ## Message Acknowledgments
