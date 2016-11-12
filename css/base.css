@@ -1,3 +1,15 @@
+/* Disable background 4px border around images */
+.reveal section img {
+  border: none;
+  background: none;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 2%;
+}
+
+
 rect.client {
   stroke: #7D3C0F;
   fill:   #EB701D;
@@ -8,4 +20,11 @@ rect.client {
 line.solidLine {
   stroke: #EB701D;
   stroke-width: 2;
+}
+
+.imageBackground {
+  position: absolute; 
+  width: 250; 
+  height: 250;
+  z-index: -1; 
 }
