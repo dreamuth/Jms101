@@ -1,62 +1,185 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <title>Java Message Service (JMS) 101</title>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<title>Java Message Service (JMS) 101</title>
 
-		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/black.css">
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!-- <link rel="stylesheet" href="reveal.js/css/theme/beige.css"> -->
+    <!-- <link rel="stylesheet" href="reveal.js/css/theme/league.css"> -->
+    <link rel="stylesheet" href="reveal.js/css/theme/sky.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/base.css">
+    <script>
+      document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section
-					id="Intro"
-					data-markdown="markdown/Intro.md"
-					data-separator="^\n\n"
-					data-vertical="^\n"
-					data-notes="^Note:"
-				></section>
-<!-- 				<section
-					id="demo"
-					data-markdown="markdown/demo.md"
-					data-separator="^\n\n\n"
-					data-vertical="^\n\n"
-					data-notes="^Note:"
-				></section> -->
-			</div>
-		</div>
+  </head>
+  <body>
+    <div id="PROSLogoBar"
+      style="position: absolute;
+             top: 20px;
+             right: 20px;
+             width: 400px;
+             height: 400px;"
+    >
+    <img src="image/PrimaryLogo.png" style="max-width:100%;max-height:10%;margin:auto;display:block;">
+    </div>
 
-		<script src="reveal.js/lib/js/head.min.js"></script>
-		<script src="reveal.js/js/reveal.js"></script>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          id="Intro"
+          data-markdown="markdown/01-Intro.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+        <section
+          id="JmsConcepts"
+          data-markdown="markdown/02-JmsConcepts.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'reveal.js/plugin/markdown/marked.js' },
-					{ src: 'reveal.js/plugin/markdown/markdown.js' },
-					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
-					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+        <section>
+          <div class="animate" id="QueueAnimiation" data-svg-src="svg/Queue.svg">
+            <svg height=900 class="svgComponent"/>
+          </div>
+        </section>
+
+        <section
+          id="Queue"
+          data-markdown="markdown/03-Queue.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        <section>
+          <div class="animate" id="TopicAnimiation" data-svg-src="svg/Topic.svg">
+            <svg height=900 class="svgComponent"/>
+          </div>
+        </section>
+
+        <section
+          id="Topic"
+          data-markdown="markdown/04-Topic.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        <section
+          id="Subscription"
+          data-markdown="markdown/05-Subscription.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        <section
+          id="JmsMessage"
+          data-markdown="markdown/06-JmsMessage.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        <section
+          id="MessageSelectors"
+          data-markdown="markdown/07-MessageSelectors.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        <section
+          id="DesignPatterns"
+          data-markdown="markdown/08-DesignPatterns.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        <section
+          id="Conclusion"
+          data-markdown="markdown/09-Conclusion.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        </div>
+    </div>
+
+    <script src="reveal.js/lib/js/head.min.js"></script>
+    <script src="reveal.js/js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+    	  slideNumber: true,
+        history: true,
+        center: true,
+        anything: [
+          {className: "animate",  initialize: (function(container, options){
+            Reveal.addEventListener( 'fragmentshown', function( event ) {
+              if (typeof event.fragment.beginElement === "function" ) {
+                event.fragment.beginElement();
+              }
+            });
+            Reveal.addEventListener( 'fragmenthidden', function( event ) {
+              if (event.fragment.hasAttribute('data-reverse') ) {
+                var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+                if ( reverse && typeof reverse.beginElement === "function" ) {
+                  reverse.beginElement();
+                }
+              }
+            });
+            if ( container.getAttribute("data-svg-src") ) {
+              var xhr = new XMLHttpRequest();
+              xhr.onload = function() {
+                if (xhr.readyState === 4) {
+                  var svg = container.querySelector('svg');
+                    container.removeChild( svg );
+                  container.innerHTML = xhr.responseText + container.innerHTML;
+                  if ( svg ) {
+                    container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+                  }
+                }
+                else {
+                  console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+                }
+              };
+              xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+              xhr.send();
+            }
+          }) },
+        ],
+        transition: Reveal.getQueryHash().transition || 'fade', // default/cube/page/concave/zoom/linear/fade/none
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        	{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'reveal.js/plugin/anything/anything.js' },
+          { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        	{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+        	{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+  </body>
 </html>
