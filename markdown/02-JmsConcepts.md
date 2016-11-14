@@ -16,12 +16,12 @@ Note: Cloud based JMS, Tons of open source message brokers and some proprietary 
 
 #### JMS Concepts
 ## Sender
-Note: Also called producer
+Note: Sender can be called Producer or Publisher based on the destination or messaging model which you are using
 
 
 #### JMS Concepts
 ## Receiver
-Note: There are multiple types of receivers. Consumer, Subscriber (durable) (shared)
+Note: Receivers can be called Consumer or Subscriber based on the destination or messaging model which you are using
 
 
 #### JMS Concepts

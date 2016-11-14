@@ -32,87 +32,6 @@ When a JMS consumer declares a message selector for a particular destination, th
     final String selector3 = "releaseYear BETWEEN 1980 AND 1989"
 
 
-## Message Acknowledgments
-
-
-#### Message Acknowledgments
-## Auto Acknowledge
-Note: With this acknowledgment mode, the session automatically acknowledges a client's receipt of a message either when the session has successfully returned from a call to receive or when the message listener the session has called to process the message successfully returns.
-
-
-#### Message Acknowledgments
-## Dups OK Acknowledge
-Note: This acknowledgment mode instructs the session to lazily acknowledge the delivery of messages. This is likely to result in the delivery of some duplicate messages if the JMS provider fails, so it should only be used by consumers that can tolerate duplicate messages. Use of this mode can reduce session overhead by minimizing the work the session does to prevent duplicates.
-
-
-#### Message Acknowledgments
-## Client Acknowledge
-Note: With this acknowledgment mode, the client acknowledges a consumed message by calling the message's acknowledge method. Acknowledging a consumed message acknowledges all messages that the session has consumed.
-
-
-#### Message Acknowledgments
-## Client Acknowledge
-    public void onMessage(Message message)
-    {
-        try
-        {
-            // Process the message
-            ...  
-            message.acknowledge();
-        }
-        catch (JMSException e)
-        {
-            throw new IllegalStateException("Failed to process the message", e);
-        }
-    }
-
-
-#### Message Acknowledgments
-## Transacted Messages
-
-
-#### Message Acknowledgments
-## Transacted Messages
-    public void onMessage(Message message)
-    {
-        try
-        {
-            // Process the message
-            ...  
-            session.commit();
-        }
-        catch (JMSException e)
-        {
-            session.rollback();
-            throw new IllegalStateException("Failed to process the message", e);
-        }
-    }
-
-
-
-## Group Messages
-
-
-#### Group Messages
-    ...
-    // send an empty payload message starting the group
-    BytesMessage msgStart = session.createBytesMessage();
-    msgStart.setStringProperty("SequenceMarker", "START_SEQUENCE");
-    sender.send(msgStart);
-
-    // now send the messages
-    TextMessage msg1 = session.createTextMessage(messagePayload);
-    sender.send(msg1);
-    TextMessage msg2 = session.createTextMessage(messagePayload);
-    sender.send(msg2);
-    ...
-
-    // send an empty payload message ending the group
-    BytesMessage msgEnd = session.createBytesMessage();
-    msgEnd.setStringProperty("SequenceMarker", "END_SEQUENCE");
-    sender.send(msgEnd);
-
-
 
 ## Message Delivery Mode
 
@@ -122,8 +41,3 @@ Note: With this acknowledgment mode, the client acknowledges a consumed message 
 
 ![](image/Persistence.png)
 Note: DB or file system, its a property of a message, broker restart, slow
-
-
-## JNDI
-#### Java Naming and Directory Interface
-Note: JNDI is a standard Java extension that provides a uniform API for accessing a variety of directory and naming services
