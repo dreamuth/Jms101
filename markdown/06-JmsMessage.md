@@ -11,40 +11,6 @@
 Note: Header - All messages support the same set of header fields. Header fields contain values used by both clients and providers to identify and route messages. Properties - Each message contains a built-in facility for supporting application-defined property values. Properties provide an efficient mechanism for supporting application-defined message filtering. Body - The JMS API defines several types of message body, which cover the majority of messaging styles currently in use.
 
 
-## Message types
-
-
-#### Message types
-## Message
-Note: The Message interface is the root interface of all JMS messages. A Message object holds all the standard message header information. It can be sent when a message containing only header information is sufficient.
-
-
-#### Message types
-## TextMessage
-Note: A TextMessage object's message body contains a java.lang.String object. This message type can be used to transport plain-text messages, and XML messages.
-
-
-#### Message types
-## ObjectMessage
-Note: An ObjectMessage object's message body contains a Serializable Java object.
-
-
-#### Message types
-## BytesMessage
-Note: A BytesMessage object's message body contains a stream of uninterpreted bytes. This message type is for literally encoding a body to match an existing message format. In many cases, it is possible to use one of the other body types, which are easier to use. Although the JMS API allows the use of message properties with byte messages, they are typically not used, since the inclusion of properties may affect the format.
-
-
-#### Message types
-## StreamMessage
-Note: A StreamMessage object's message body contains a stream of primitive values in the Java programming language ("Java primitives"). It is filled and read sequentially.
-
-
-#### Message types
-## MapMessage
-Note: A MapMessage object's message body contains a set of name-value pairs, where names are String objects, and values are Java primitives. The entries can be accessed sequentially or randomly by name. The order of the entries is undefined
-
-
-
 #### Anatomy of a JMS Message
 #### Headers
 ## JMSDestination
@@ -108,3 +74,37 @@ Note: Message properties are additional headers that can be assigned to a messag
 #### Anatomy of a JMS Message
 ## Payload
 Note: Actual message payload, Stream, bytes, object, text and map
+
+
+
+## Message types
+
+
+#### Message types
+## Message
+Note: The Message interface is the root interface of all JMS messages. A Message object holds all the standard message header information. It can be sent when a message containing only header information is sufficient.
+
+
+#### Message types
+## TextMessage
+Note: A TextMessage object's message body contains a java.lang.String object. This message type can be used to transport plain-text messages, and XML messages.
+
+
+#### Message types
+## ObjectMessage
+Note: An ObjectMessage object's message body contains a Serializable Java object.
+
+
+#### Message types
+## BytesMessage
+Note: A BytesMessage object's message body contains a stream of uninterpreted bytes. This message type is for literally encoding a body to match an existing message format. In many cases, it is possible to use one of the other body types, which are easier to use. Although the JMS API allows the use of message properties with byte messages, they are typically not used, since the inclusion of properties may affect the format.
+
+
+#### Message types
+## StreamMessage
+Note: A StreamMessage object's message body contains a stream of primitive values in the Java programming language ("Java primitives"). It is filled and read sequentially.
+
+
+#### Message types
+## MapMessage
+Note: A MapMessage object's message body contains a set of name-value pairs, where names are String objects, and values are Java primitives. The entries can be accessed sequentially or randomly by name. The order of the entries is undefined
