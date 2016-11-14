@@ -1,6 +1,8 @@
 ## Message Selectors
 Based on a subset of the SQL92 conditional expression syntax.
-Note: You can receive messages only which you are interested in by using message selectors. Only messages whose header or property values match your filter will be delivered to you. But message selectors cannot reference message body values (payload) 
+Note:
+You can receive messages only which you are interested in by using message selectors. Only messages whose header or property values match your filter will be delivered to you. But message selectors cannot reference message body values (payload). When message selectors are used, the consumer will receive only messages that apply to the specified filter
+When a JMS consumer declares a message selector for a particular destination, the selector is applied only to messages delivered to that consumer. Every JMS client can have a different selector specified for each of its consumers.
 
 
 #### Message Selectors
@@ -10,16 +12,13 @@ Note: You can receive messages only which you are interested in by using message
 
     // Wait for response for this specific request
     try (final DistributedConsumer consumer = new DistributedConsumer(
-        session, 
-        connection.lookupQueue("responseQueue"), 
+        session,
+        connection.lookupQueue("responseQueue"),
         "JMSCorrelationID = '" + jmsRequestMessage.getJMSMessageID() + "'"))
     {
         final Message responseMessage = consumer.receive();
         logger.info("Stock price = " + responseMessage.getObject().toString());
     }
-
-Note: When message selectors are used, the consumer will receive only messages that apply to the specified filter
-When a JMS consumer declares a message selector for a particular destination, the selector is applied only to messages delivered to that consumer. Every JMS client can have a different selector specified for each of its consumers.
 
 
 #### Message Selectors
@@ -38,14 +37,17 @@ When a JMS consumer declares a message selector for a particular destination, th
 
 #### Message Acknowledgments
 ## Auto Acknowledge
+Note: With this acknowledgment mode, the session automatically acknowledges a client's receipt of a message either when the session has successfully returned from a call to receive or when the message listener the session has called to process the message successfully returns.
 
 
 #### Message Acknowledgments
 ## Dups OK Acknowledge
+Note: This acknowledgment mode instructs the session to lazily acknowledge the delivery of messages. This is likely to result in the delivery of some duplicate messages if the JMS provider fails, so it should only be used by consumers that can tolerate duplicate messages. Use of this mode can reduce session overhead by minimizing the work the session does to prevent duplicates.
 
 
 #### Message Acknowledgments
 ## Client Acknowledge
+Note: With this acknowledgment mode, the client acknowledges a consumed message by calling the message's acknowledge method. Acknowledging a consumed message acknowledges all messages that the session has consumed.
 
 
 #### Message Acknowledgments

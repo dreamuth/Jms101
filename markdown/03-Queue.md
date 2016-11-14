@@ -1,24 +1,20 @@
 #### JMS Queue
 ## Point-To-Point Messaging (p2p)
 Note: A JMS queue guarantees that each message is delivered to only one consumer.
-In the simplest sense, publish-and-subscribe is intended for a one-to-one delivery of messages
+In the simplest sense, this model is intended for a one-to-one delivery of messages
 
 
-#### Point To Point Messaging (p2p)
+#### JMS Queue
 ## Delivered to only one consumer
 
 
-#### Point To Point Messaging (p2p)
+#### JMS Queue
 ## Messages are ordered
 
 
-#### Point To Point Messaging (p2p)
-## No coupling
-
-
-#### Point To Point Messaging (p2p)
+#### JMS Queue
 ## Queue retain messages until consumed or expired
 
 
-#### Point To Point Messaging (p2p)
+#### JMS Queue
 ## Synchronous or Asynchronous

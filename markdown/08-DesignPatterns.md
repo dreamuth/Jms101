@@ -2,10 +2,10 @@
 
 
 #### Popular Design Patterns
-### async fire-and-forget
+### Async fire-and-forget
 ![](image/fireNforget.png)
 
 
 #### Popular Design Patterns
-### async request/reply
+### Async request/reply
 ![](image/ReqResponse.png)
