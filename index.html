@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
   <head>
+    <title>Java Message Service (JMS) 101</title>
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>Java Message Service (JMS) 101</title>
 
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
     <!-- <link rel="stylesheet" href="reveal.js/css/theme/beige.css"> -->
@@ -16,355 +16,115 @@
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
     <link rel="stylesheet" href="css/base.css">
-
-    <!-- Printing and PDF exports -->
+    <script>
+      document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
   </head>
   <body>
+    <div id="PROSLogoBar"
+      style="position: absolute;
+             top: 20px;
+             right: 20px;
+             width: 400px;
+             height: 400px;"
+    >
+    <img src="image/PrimaryLogo.png" style="max-width:100%;max-height:10%;margin:auto;display:block;">
+    </div>
+
     <div class="reveal">
       <div class="slides">
         <section
           id="Intro"
-          data-markdown="markdown/Intro.md"
-          data-separator="^\n\n"
+          data-markdown="markdown/01-Intro.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
           data-notes="^Note:"
         ></section>
+
+        <section>
+          <div class="animate" id="QueueAnimiationRealtime" data-svg-src="svg/QueueRealtime.svg">
+            <svg height=900 class="svgComponent"/>
+          </div>
+        </section>
+
+        <section
+          id="JmsConcepts"
+          data-markdown="markdown/01-JmsConcepts.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
+          data-notes="^Note:"
+        ></section>
+
+        <section>
+          <div class="animate" id="QueueAnimiation" data-svg-src="svg/Queue.svg">
+            <svg height=900 class="svgComponent"/>
+          </div>
+        </section>
 
         <section
           id="Queue"
-          data-markdown="markdown/Queue.md"
-          data-separator="^\n\n"
+          data-markdown="markdown/03-Queue.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
           data-notes="^Note:"
         ></section>
 
         <section>
-          <div class="animate" id="QueueAnimiation">
-            <img class="imageBackground" data-src="image/Queue.png"/>
-            <svg width="1000", height="800" >
-
-              <!-- Consumer1 to Broker Connection -->
-              <line x1="767" y1="80" x2="605" y2="285" class="solidLine" opacity="0" style="stroke-dasharray: 10">
-                <animate          from="1"     to="1"       dur="0.1s"  id="QsetupConsumer"   begin="indefinite"                            attributeName="fill-opacity"    fill="freeze" class="fragment"/>
-                <animate          from="0"     to="1"       dur="1s"                          begin="QsetupConsumer.end; QRC1WorkOpa.end"   attributeName="opacity"         fill="freeze"/>
-                <animate          from="1"     to="0"       dur=".2s"                         begin="QMsg1Move3.end"                        attributeName="opacity"         fill="freeze"/>
-              </line>
-              <path d="M 848,60 l -4,-4 l -4,12 l 12,-4 z" transform="translate(-240 220)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate          from="0"    to="1"        dur="1s"                          begin="QsetupConsumer.end; QRC1WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate          from="1"    to="0"        dur=".2s"                          begin="QMsg1Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </path>
-              <image xlink:href="image/settings.svg" x="900" y="36" height="45px" width="45px" opacity="0">
-                <animate          from="0"        to="1"          dur="0.1s"  id="QC1WorkOpa"    begin="QMsg1Move3.end"     attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 922 58" to="360 922 58" dur="5s"    id="QC1WorkRotate" begin="QC1WorkOpa.end"     attributeName="transform" type="rotate" />
-                <animate          from="1"        to="0"          dur="0.1s"  id="QRC1WorkOpa"   begin="QC1WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
-              </image>
-
-              <!-- Consumer2 to Broker Connection -->
-              <line x1="767" y1="290" x2="605" y2="290" class="solidLine" opacity="0" style="stroke-dasharray: 10">
-                <animate          from="0"      to="1"        dur="1s"    id="QC2ToBrLineOpa"    begin="QsetupConsumer.end; QRC2WorkOpa.end"  attributeName="opacity"  fill="freeze"/>
-                <animate          from="1"      to="0"        dur=".2s"                          begin="QMsg2Move3.end"                      attributeName="opacity"  fill="freeze"/>
-              </line>
-              <path d="M 848,290 l 0,-5 l -10,5 l 10,5 z" transform="translate(-237 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate          from="0"      to="1"        dur="1s"                          begin="QsetupConsumer.end; QRC2WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate          from="1"      to="0"        dur=".2s"                         begin="QMsg2Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </path>
-              <image xlink:href="image/settings.svg" x="900" y="253" height="45px" width="45px" opacity="0">
-                <animate          from="0"          to="1"            dur="0.1s"  id="QC2WorkOpa"    begin="QMsg2Move3.end"     attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 922 275"  to="360 922 275"  dur="5s"    id="QC2WorkRotate" begin="QC2WorkOpa.end"     attributeName="transform" type="rotate" />
-                <animate          from="1"          to="0"            dur="0.1s"  id="QRC2WorkOpa"   begin="QC2WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
-              </image>
-
-              <!-- Consumer3 to Broker Connection -->
-              <line x1="767" y1="500" x2="605" y2="295" class="solidLine" opacity="0" style="stroke-dasharray: 10">
-                <animate          from="0"      to="1"        dur="1s"                        begin="QsetupConsumer.end; QRC3WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate          from="1"      to="0"        dur=".2s"                       begin="QMsg3Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </line>
-              <path d="M 848,520 l -4,4 l -4,-12 l 12,4 z" transform="translate(-240 -220)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate          from="0"      to="1"        dur="1s"                        begin="QsetupConsumer.end; QRC3WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate          from="1"      to="0"        dur=".2s"                       begin="QMsg3Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </path>
-              <image xlink:href="image/settings.svg" x="900" y="470" height="45px" width="45px" opacity="0">
-                <animate          from="0"        to="1"            dur="0.1s"  id="QC3WorkOpa"    begin="QMsg3Move3.end"     attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 922 492" to="360 922 492" dur="5s"    id="QC3WorkRotate" begin="QC3WorkOpa.end"     attributeName="transform" type="rotate" />
-                <animate          from="1"        to="0"            dur="0.1s"  id="QRC3WorkOpa"   begin="QC3WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
-              </image>
-
-              <!-- Producer to Broker connection -->
-              <line x1="230" y1="290" x2="370" y2="290" class="solidLine" opacity="0">
-                <animate          from="0"      to="0"        dur="0.1s"  id="QsendMsgs"         begin="QsetupConsumer.end + 1s"                                        attributeName="opacity"  fill="freeze" />
-                <animate          from="0"      to="1"        dur="1s"    id="QP1ToBrLineOpa"    begin="QMsg1StartDelay.end; QMsg2StartDelay.end; QMsg3StartDelay.end"  attributeName="opacity"  fill="freeze"/>
-                <animate          from="1"      to="0"        dur="1s"    id="QRP1ToBrLineOpa"   begin="QMsg1Move1.end; QMsg2Move1.end; QMsg3Move1.end"                 attributeName="opacity"  fill="freeze"/>
-              </line>
-              <path d="M 254,290 l 0,-5 l 10,5 l -10,5 z" transform="translate(107 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate          from="0"      to="1"        dur="1s"    id="QP1ToBrArrowOpa"   begin="QMsg1StartDelay.end; QMsg2StartDelay.end; QMsg3StartDelay.end"  attributeName="opacity"   fill="freeze"/>
-                <animate          from="1"      to="0"        dur="1s"                          begin="QMsg1Move1.end; QMsg2Move1.end; QMsg3Move1.end"                  attributeName="opacity"   fill="freeze"/>
-              </path>
-
-              <!-- Message #1 -->
-              <circle id="msg1" cx="200" cy="290" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
-                <animate          from="10"     to="10"       dur=".1s"   id="QMsg1StartDelay"   begin="QsendMsgs.end; QMsg1Loop1.end; QMsg1Loop2.end"    attributeName="r"         fill="freeze"/>
-                <animate          from="10"     to="10"       dur="18s"   id="QMsg1Loop1"        begin="QMsg1Loop2.end; QsendMsgs.end"                    attributeName="r"         fill="freeze"/>
-                <animate          from="10"     to="10"       dur="18s"   id="QMsg1Loop2"        begin="QMsg1Loop1.end"                                   attributeName="r"         fill="freeze"/>
-                <animate          from="0"      to="1"        dur="0.1s"  id="QMsg1Opa"          begin="QMsg1StartDelay.end + 1.5s"                       attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="175 0"    dur="2s"    id="QMsg1Move1"        begin="QMsg1Opa.end"                                     attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="175 0"  to="400 0"    dur="1.6s"  id="QMsg1Move2"        begin="QMsg1Move1.end"                                   attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="400 0"  to="580 -230" dur="2.5s"  id="QMsg1Move21"       begin="QMsg1Move2.end"                                   attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="580 -230" to="620 -230" dur=".5s"  id="QMsg1Move3"       begin="QMsg1Move21.end"                                 attributeName="transform" fill="freeze" type="translate" />
-                <animate          from="1"      to="0"        dur="1s"    id="QMsg1End"          begin="QMsg1Move3.end"                                   attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="QMsg1End.end"                                     attributeName="transform" fill="freeze" type="translate" />
-              </circle>
-
-              <!-- Message #2 -->
-              <circle id="msg2" cx="200" cy="290" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
-                <animate          from="10"     to="10"       dur="6s"    id="QMsg2StartDelay"   begin="QsendMsgs.end; QMsg2Loop1.end; QMsg2Loop2.end" attributeName="r" fill="freeze"/>
-                <animate          from="10"     to="10"       dur="18s"   id="QMsg2Loop1"        begin="QMsg2Loop2.end; QsendMsgs.end" attributeName="r"  fill="freeze"/>
-                <animate          from="10"     to="10"       dur="18s"   id="QMsg2Loop2"        begin="QMsg2Loop1.end"        attributeName="r"         fill="freeze"/>
-                <animate          from="0"      to="1"        dur="0.1s"  id="QMsg2Opa"          begin="QMsg2StartDelay.end + 1.5s" attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="175 0"    dur="2s"    id="QMsg2Move1"        begin="QMsg2Opa.end"         attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="175 0"  to="400 0"    dur="1.6s"  id="QMsg2Move2"        begin="QMsg2Move1.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="400 0"  to="620 0"    dur="2.5s"  id="QMsg2Move3"        begin="QMsg2Move2.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animate          from="1"      to="0"        dur="1s"    id="QMsg2End"          begin="QMsg2Move3.end"       attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="QMsg2End.end"         attributeName="transform" fill="freeze" type="translate" />
-              </circle>
-
-              <!-- Message #3 -->
-              <circle id="msg3" cx="200" cy="290" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
-                <animate          from="10"     to="10"       dur="12s"   id="QMsg3StartDelay"   begin="QsendMsgs.end; QMsg3Loop1.end; QMsg3Loop2.end" attributeName="r" fill="freeze"/>
-                <animate          from="10"     to="10"       dur="18s"   id="QMsg3Loop1"        begin="QMsg3Loop2.end; QsendMsgs.end" attributeName="r"  fill="freeze"/>
-                <animate          from="10"     to="10"       dur="18s"   id="QMsg3Loop2"        begin="QMsg3Loop1.end"        attributeName="r"         fill="freeze"/>
-                <animate          from="0"      to="1"        dur="0.1s"  id="QMsg3Opa"          begin="QMsg3StartDelay.end + 1.5s" attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="175 0"    dur="2s"    id="QMsg3Move1"        begin="QMsg3Opa.end"         attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="175 0"  to="400 0"    dur="1.6s"  id="QMsg3Move2"        begin="QMsg3Move1.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="400 0"  to="560 200"  dur="2.5s"  id="QMsg3Move21"       begin="QMsg3Move2.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="560 200" to="620 200"  dur=".5s"  id="QMsg3Move3"        begin="QMsg3Move21.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animate          from="1"      to="0"        dur="1s"    id="QMsg3End"          begin="QMsg3Move3.end"       attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="QMsg3End.end"         attributeName="transform" fill="freeze" type="translate" />
-              </circle>
-
-            </svg>
+          <div class="animate" id="TopicAnimiation" data-svg-src="svg/Topic.svg">
+            <svg height=900 class="svgComponent"/>
           </div>
         </section>
-        <section>
-  				<h2>Topic</h2>
-  				<p>
-  					A distribution mechanism for publishing messages that are delivered to multiple subscribers.
-  				</p>
-  			</section>
-        <section>
-          <div class="animate">
-            <svg width="1000", height="800">
 
-              <!-- Producer -->
-              <g>
-                <rect x="20" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
-                <text x="35" y="335"  font-size="16">Producer</text>
-              </g>
-
-              <!-- Consumers -->
-              <g>
-                <rect x="701" y="70" rx="10" ry="10" width="100" height="60" class="client"/>
-                <text x="706" y="124"  font-size="16">Consumer 1</text>
-              </g>
-              <g>
-                <rect x="701" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
-                <text x="706" y="354"  font-size="16">Consumer 2</text>
-              </g>
-              <g>
-                <rect x="701" y="530" rx="10" ry="10" width="100" height="60" class="client"/>
-                <text x="706" y="554"  font-size="16">Consumer 3</text>
-              </g>
-
-              <!-- Broker -->
-              <g>
-                <path d="M 250 280 q -25 50 0 100" stroke="#7D3C0F" stroke-width="2" fill="#EB701D" />
-                <rect x="250" y="280" width="200" height="100" fill="#EB701D"/>
-                <line x1="250" y1="280" x2="450" y2="280" style="stroke:#7D3C0F;stroke-width:2" />
-                <line x1="250" y1="380" x2="450" y2="380" style="stroke:#7D3C0F;stroke-width:2" />
-                <ellipse cx="450" cy="330" rx="20" ry="50" style="fill:#F1975B;stroke:#7D3C0F;stroke-width:2" />
-                <line x1="250" y1="282" x2="250" y2="378" style="stroke:#EB701D;stroke-width:2" />
-                <text x="300" y="360"  font-size="24">Topic</text>
-              </g>
-
-              <!-- Consumer1 to Broker Connection -->
-              <line x1="700" y1="100" x2="450" y2="330" class="solidLine" opacity="0" style="stroke-dasharray: 10">
-                <animate            from="1"     to="1"       dur="0.1s"  id="TsetupConsumer"   begin="indefinite"                          attributeName="fill-opacity"   fill="freeze" class="fragment"/>
-                <animate            from="0"     to="1"       dur="1s"                          begin="TsetupConsumer.end; TRC1WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate            from="1"     to="0"       dur="1s"                          begin="TMsg1Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </line>
-              <path d="M 700,100 l -4,-4 l -4,12 l 12,-4 z" transform="translate(-240 220)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate            from="0"    to="1"        dur="1s"                          begin="TsetupConsumer.end; TRC1WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate            from="1"    to="0"        dur="1s"                          begin="TMsg1Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </path>
-              <image xlink:href="image/settings.svg" x="760" y="80" height="20px" width="20px" opacity="0">
-                <animate            from="0"        to="1"          dur="0.1s"  id="TC1WorkOpa"    begin="TMsg1Move3.end"     attributeName="opacity"   fill="freeze"/>
-                <animateTransform   from="0 770 90" to="360 770 90" dur="1.5s"    id="TC1WorkRotate" begin="TC1WorkOpa.end"     attributeName="transform" type="rotate" />
-                <animate            from="1"        to="0"          dur="0.1s"  id="TRC1WorkOpa"   begin="TC1WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
-              </image>
-
-              <!-- Consumer2 to Broker Connection -->
-              <line x1="700" y1="330" x2="450" y2="330" class="solidLine" opacity="0" style="stroke-dasharray: 10">
-                <animate            from="0"      to="1"        dur="1s"    id="TC2ToBrLineOpa"    begin="TsetupConsumer.end; TRC2WorkOpa.end"  attributeName="opacity"  fill="freeze"/>
-                <animate            from="1"      to="0"        dur="1s"                          begin="TMsg2Move3.end"                      attributeName="opacity"  fill="freeze"/>
-              </line>
-              <path d="M 700,330 l 0,-5 l -10,5 l 10,5 z" transform="translate(-237 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate            from="0"      to="1"        dur="1s"                          begin="TsetupConsumer.end; TRC2WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate            from="1"      to="0"        dur="1s"                          begin="TMsg2Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </path>
-              <image xlink:href="image/settings.svg" x="760" y="320" height="20px" width="20px" opacity="0">
-                <animate            from="0"          to="1"            dur="0.1s"  id="TC2WorkOpa"    begin="TMsg2Move3.end"     attributeName="opacity"   fill="freeze"/>
-                <animateTransform   from="0 770 330"  to="360 770 330"  dur="1.5s"    id="TC2WorkRotate" begin="TC2WorkOpa.end"     attributeName="transform" type="rotate" />
-                <animate            from="1"          to="0"            dur="0.1s"  id="TRC2WorkOpa"   begin="TC2WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
-              </image>
-
-              <!-- Consumer3 to Broker Connection -->
-              <line x1="700" y1="560" x2="450" y2="330" class="solidLine" opacity="0" style="stroke-dasharray: 10">
-                <animate            from="0"      to="1"        dur="1s"                        begin="TsetupConsumer.end; TRC3WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate            from="1"      to="0"        dur="1s"                        begin="TMsg3Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </line>
-              <path d="M 700,560 l -4,4 l -4,-12 l 12,4 z" transform="translate(-240 -220)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate            from="0"      to="1"        dur="1s"                        begin="TsetupConsumer.end; TRC3WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate            from="1"      to="0"        dur="1s"                        begin="TMsg3Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </path>
-              <image xlink:href="image/settings.svg" x="760" y="560" height="20px" width="20px" opacity="0">
-                <animate            from="0"        to="1"            dur="0.1s"  id="TC3WorkOpa"    begin="TMsg3Move3.end"     attributeName="opacity"   fill="freeze"/>
-                <animateTransform   from="0 770 570" to="360 770 570" dur="1.5s"    id="TC3WorkRotate" begin="TC3WorkOpa.end"     attributeName="transform" type="rotate" />
-                <animate            from="1"        to="0"            dur="0.1s"  id="TRC3WorkOpa"   begin="TC3WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
-              </image>
-
-              <!-- Producer to Broker connection -->
-              <line x1="121" y1="330" x2="228" y2="330" class="solidLine" opacity="0">
-                <animate          from="0"      to="0"        dur="0.1s"  id="TsendMsgs"         begin="TsetupConsumer.end + 1s"                  attributeName="opacity"  fill="freeze" />
-                <animate          from="0"      to="1"        dur="1s"    id="TP1ToBrLineOpa"    begin="TMsg1StartDelay.end"  attributeName="opacity"  fill="freeze"/>
-                <animate          from="1"      to="0"        dur="1s"    id="TRP1ToBrLineOpa"   begin="TMsg1Move1.end"                     attributeName="opacity"  fill="freeze"/>
-              </line>
-              <path d="M 121,330 l 0,-5 l 10,5 l -10,5 z" transform="translate(107 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate          from="0"      to="1"        dur="1s"    id="TP1ToBrArrowOpa"   begin="TMsg1StartDelay.end"  attributeName="opacity"   fill="freeze"/>
-                <animate          from="1"      to="0"        dur="1s"                          begin="TMsg1Move1.end"                     attributeName="opacity"   fill="freeze"/>
-              </path>
-
-              <!-- Message #1 -->
-              <circle id="msg1" cx="100" cy="330" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
-                <animate          from="10"     to="10"       dur=".1s"   id="TMsg1StartDelay"   begin="TsendMsgs.end; TMsg1Loop1.end; TMsg1Loop2.end" attributeName="r" fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="TMsg1Loop1"        begin="TMsg1Loop2.end; TsendMsgs.end" attributeName="r"  fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="TMsg1Loop2"        begin="TMsg1Loop1.end"        attributeName="r"         fill="freeze"/>
-                <animate          from="0"      to="1"        dur="0.1s"  id="TMsg1Opa"          begin="TMsg1StartDelay.end + 1.5s" attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="165 0"    dur="2s"    id="TMsg1Move1"        begin="TMsg1Opa.end"          attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="165 0"  to="350 0"    dur="1.6s"  id="TMsg1Move2"        begin="TMsg1Move1.end"        attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="350 0"  to="620 -245" dur="2.5s"  id="TMsg1Move3"        begin="TMsg1Move2.end"        attributeName="transform" fill="freeze" type="translate" />
-                <animate          from="1"      to="0"        dur="1s"    id="TMsg1End"          begin="TMsg1Move3.end"        attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="TMsg1End.end"          attributeName="transform" fill="freeze" type="translate" />
-              </circle>
-
-              <!-- Message #2 -->
-              <circle id="msg2" cx="100" cy="330" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
-                <animate          from="10"     to="10"       dur=".1s"    id="TMsg2StartDelay"   begin="TsendMsgs.end; TMsg2Loop1.end; TMsg2Loop2.end" attributeName="r" fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="TMsg2Loop1"        begin="TMsg2Loop2.end; TsendMsgs.end" attributeName="r"  fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="TMsg2Loop2"        begin="TMsg2Loop1.end"        attributeName="r"         fill="freeze"/>
-                <animate          from="0"      to="1"        dur="0.1s"  id="TMsg2Opa"          begin="TMsg2StartDelay.end + 1.5s" attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="165 0"    dur="2s"    id="TMsg2Move1"        begin="TMsg2Opa.end"         attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="165 0"  to="350 0"    dur="1.6s"  id="TMsg2Move2"        begin="TMsg2Move1.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="350 0"  to="620 0"    dur="2.5s"  id="TMsg2Move3"        begin="TMsg2Move2.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animate          from="1"      to="0"        dur="1s"    id="TMsg2End"          begin="TMsg2Move3.end"       attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="TMsg2End.end"         attributeName="transform" fill="freeze" type="translate" />
-              </circle>
-
-              <!-- Message #3 -->
-              <circle id="msg3" cx="100" cy="330" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
-                <animate          from="10"     to="10"       dur=".1s"   id="TMsg3StartDelay"   begin="TsendMsgs.end; TMsg3Loop1.end; TMsg3Loop2.end" attributeName="r" fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="TMsg3Loop1"        begin="TMsg3Loop2.end; TsendMsgs.end" attributeName="r"  fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="TMsg3Loop2"        begin="TMsg3Loop1.end"        attributeName="r"         fill="freeze"/>
-                <animate          from="0"      to="1"        dur="0.1s"  id="TMsg3Opa"          begin="TMsg3StartDelay.end + 1.5s" attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="165 0"    dur="2s"    id="TMsg3Move1"        begin="TMsg3Opa.end"         attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="165 0"  to="350 0"    dur="1.6s"  id="TMsg3Move2"        begin="TMsg3Move1.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="350 0"  to="620 245"  dur="2.5s"  id="TMsg3Move3"        begin="TMsg3Move2.end"       attributeName="transform" fill="freeze" type="translate" />
-                <animate          from="1"      to="0"        dur="1s"    id="TMsg3End"          begin="TMsg3Move3.end"       attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="QMsg3End.end"         attributeName="transform" fill="freeze" type="translate" />
-              </circle>
-
-            </svg>
-          </div>
-        </section>
         <section
-          id="MsgModels"
-          data-markdown="markdown/MsgModels.md"
-          data-separator="^\n\n"
+          id="Topic"
+          data-markdown="markdown/04-Topic.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
           data-notes="^Note:"
         ></section>
-        <section>
-        <h4>Non-Persistent Message Delivery Mode</h4>
-          <div class="animate" id="NonPersistance">
-            <svg width="1000", height="800">
 
-              <!-- Producer -->
-              <g>
-                <rect x="20" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
-                <text x="35" y="335"  font-size="16">Producer</text>
-              </g>
-
-              <!-- Consumers -->
-              <g>
-                <rect x="701" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
-                <text x="706" y="354"  font-size="16">Consumer</text>
-              </g>
-
-              <!-- Broker -->
-              <g>
-                <path d="M 250 280 q -25 50 0 100" stroke="#7D3C0F" stroke-width="2" fill="#EB701D" />
-                <rect x="250" y="280" width="200" height="100" fill="#EB701D"/>
-                <line x1="250" y1="280" x2="450" y2="280" style="stroke:#7D3C0F;stroke-width:2" />
-                <line x1="250" y1="380" x2="450" y2="380" style="stroke:#7D3C0F;stroke-width:2" />
-                <ellipse cx="450" cy="330" rx="20" ry="50" style="fill:#F1975B;stroke:#7D3C0F;stroke-width:2" />
-                <line x1="250" y1="282" x2="250" y2="378" style="stroke:#EB701D;stroke-width:2" />
-                <text x="300" y="360"  font-size="24">Broker</text>
-              </g>
-
-              <!-- Consumer to Broker Connection -->
-              <line x1="700" y1="330" x2="450" y2="330" class="solidLine" opacity="0" style="stroke-dasharray: 10">
-                <animate            from="0"      to="1"        dur="1s"    id="NPC2ToBrLineOpa"    begin="1s; NPRC2WorkOpa.end"  attributeName="opacity"  fill="freeze"/>
-                <animate            from="1"      to="0"        dur="1s"                          begin="NPMsg1Move3.end"                      attributeName="opacity"  fill="freeze"/>
-              </line>
-              <path d="M 700,330 l 0,-5 l -10,5 l 10,5 z" transform="translate(-237 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate            from="0"      to="1"        dur="1s"                          begin="1s; NPRC2WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
-                <animate            from="1"      to="0"        dur="1s"                          begin="NPMsg1Move3.end"                       attributeName="opacity"   fill="freeze"/>
-              </path>
-              <image xlink:href="image/settings.svg" x="760" y="320" height="20px" width="20px" opacity="0">
-                <animate            from="0"          to="1"            dur="0.1s"  id="NPC2WorkOpa"    begin="NPMsg1Move3.end"     attributeName="opacity"   fill="freeze"/>
-                <animateTransform   from="0 770 330"  to="360 770 330"  dur="1.5s"    id="NPC2WorkRotate" begin="NPC2WorkOpa.end"     attributeName="transform" type="rotate" />
-                <animate            from="1"          to="0"            dur="0.1s"  id="NPRC2WorkOpa"   begin="NPC2WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
-              </image>
-
-              <!-- Producer to Broker connection -->
-              <line x1="121" y1="330" x2="228" y2="330" class="solidLine" opacity="0">
-                <animate          from="0"      to="0"        dur="0.1s"  id="NPsendMsgs"         begin="3s"                  attributeName="opacity"  fill="freeze" />
-                <animate          from="0"      to="1"        dur="1s"    id="NPP1ToBrLineOpa"    begin="NPMsg1StartDelay.end"  attributeName="opacity"  fill="freeze"/>
-                <animate          from="1"      to="0"        dur="1s"    id="NPRP1ToBrLineOpa"   begin="NPMsg1Move1.end"                     attributeName="opacity"  fill="freeze"/>
-              </line>
-              <path d="M 121,330 l 0,-5 l 10,5 l -10,5 z" transform="translate(107 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
-                <animate          from="0"      to="1"        dur="1s"    id="NPP1ToBrArrowOpa"   begin="NPMsg1StartDelay.end"  attributeName="opacity"   fill="freeze"/>
-                <animate          from="1"      to="0"        dur="1s"                          begin="NPMsg1Move1.end"                     attributeName="opacity"   fill="freeze"/>
-              </path>
-
-              <!-- Message #1 -->
-              <circle id="msg1" cx="100" cy="330" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
-                <animate          from="10"     to="10"       dur=".1s"   id="NPMsg1StartDelay"   begin="NPsendMsgs.end; NPMsg1Loop1.end; NPMsg1Loop2.end" attributeName="r" fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="NPMsg1Loop1"        begin="NPMsg1Loop2.end; NPsendMsgs.end" attributeName="r"  fill="freeze"/>
-                <animate          from="10"     to="10"       dur="10s"   id="NPMsg1Loop2"        begin="NPMsg1Loop1.end"        attributeName="r"         fill="freeze"/>
-                <animate          from="0"      to="1"        dur="0.1s"  id="NPMsg1Opa"          begin="NPMsg1StartDelay.end + 1.5s" attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="165 0"    dur="2s"    id="NPMsg1Move1"        begin="NPMsg1Opa.end"          attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="165 0"  to="350 0"    dur="1.6s"  id="NPMsg1Move2"        begin="NPMsg1Move1.end"        attributeName="transform" fill="freeze" type="translate" />
-                <animateTransform from="350 0"  to="620 0"    dur="2.5s"  id="NPMsg1Move3"        begin="NPMsg1Move2.end"        attributeName="transform" fill="freeze" type="translate" />
-                <animate          from="1"      to="0"        dur="1s"    id="NPMsg1End"          begin="NPMsg1Move3.end"        attributeName="opacity"   fill="freeze"/>
-                <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="NPMsg1End.end"          attributeName="transform" fill="freeze" type="translate" />
-              </circle>
-            </svg>
-          </div>
-        </section>
         <section
-          id="Filter"
-          data-markdown="markdown/Filter.md"
-          data-separator="^\n\n"
+          id="Subscription"
+          data-markdown="markdown/05-Subscription.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
           data-notes="^Note:"
         ></section>
-      </div>
+
+        <section
+          id="JmsMessage"
+          data-markdown="markdown/06-JmsMessage.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
+          data-notes="^Note:"
+        ></section>
+
+        <section
+          id="MessageSelectors"
+          data-markdown="markdown/07-MessageSelectors.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
+          data-notes="^Note:"
+        ></section>
+
+        <section
+          id="DesignPatterns"
+          data-markdown="markdown/08-DesignPatterns.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
+          data-notes="^Note:"
+        ></section>
+
+        <section
+          id="Conclusion"
+          data-markdown="markdown/09-Conclusion.md"
+          data-separator="^\n\n\n"
+          data-vertical="^\n\n"
+          data-notes="^Note:"
+        ></section>
+
+        </div>
     </div>
 
     <script src="reveal.js/lib/js/head.min.js"></script>

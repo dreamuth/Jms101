@@ -1,0 +1,73 @@
+<svg 
+	id="TopicAnimationSvg" 
+	version="1.1" 
+	width="1000" 
+	height="800" 
+	xmlns:svg="http://www.w3.org/2000/svg" 
+	xmlns="http://www.w3.org/2000/svg" 
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <!-- Producer -->
+  <g>
+    <rect x="20" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
+    <text x="35" y="335"  font-size="16">Producer</text>
+  </g>
+
+  <!-- Consumers -->
+  <g>
+    <rect x="701" y="300" rx="10" ry="10" width="100" height="60" class="client"/>
+    <text x="706" y="354"  font-size="16">Consumer</text>
+  </g>
+
+  <!-- Broker -->
+  <g>
+    <path d="M 250 280 q -25 50 0 100" stroke="#7D3C0F" stroke-width="2" fill="#EB701D" />
+    <rect x="250" y="280" width="200" height="100" fill="#EB701D"/>
+    <line x1="250" y1="280" x2="450" y2="280" style="stroke:#7D3C0F;stroke-width:2" />
+    <line x1="250" y1="380" x2="450" y2="380" style="stroke:#7D3C0F;stroke-width:2" />
+    <ellipse cx="450" cy="330" rx="20" ry="50" style="fill:#F1975B;stroke:#7D3C0F;stroke-width:2" />
+    <line x1="250" y1="282" x2="250" y2="378" style="stroke:#EB701D;stroke-width:2" />
+    <text x="300" y="360"  font-size="24">Broker</text>
+  </g>
+
+  <!-- Consumer to Broker Connection -->
+  <line x1="700" y1="330" x2="450" y2="330" class="solidLine" opacity="0" style="stroke-dasharray: 10">
+    <animate            from="0"      to="1"        dur="1s"    id="NPC2ToBrLineOpa"    begin="1s; NPRC2WorkOpa.end"  attributeName="opacity"  fill="freeze"/>
+    <animate            from="1"      to="0"        dur="1s"                          begin="NPMsg1Move3.end"                      attributeName="opacity"  fill="freeze"/>
+  </line>
+  <path d="M 700,330 l 0,-5 l -10,5 l 10,5 z" transform="translate(-237 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+    <animate            from="0"      to="1"        dur="1s"                          begin="1s; NPRC2WorkOpa.end"   attributeName="opacity"   fill="freeze"/>
+    <animate            from="1"      to="0"        dur="1s"                          begin="NPMsg1Move3.end"                       attributeName="opacity"   fill="freeze"/>
+  </path>
+  <image xlink:href="svg/settings.svg" x="760" y="320" height="20px" width="20px" opacity="0">
+    <animate            from="0"          to="1"            dur="0.1s"  id="NPC2WorkOpa"    begin="NPMsg1Move3.end"     attributeName="opacity"   fill="freeze"/>
+    <animateTransform   from="0 770 330"  to="360 770 330"  dur="1.5s"    id="NPC2WorkRotate" begin="NPC2WorkOpa.end"     attributeName="transform" type="rotate" />
+    <animate            from="1"          to="0"            dur="0.1s"  id="NPRC2WorkOpa"   begin="NPC2WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
+  </image>
+
+  <!-- Producer to Broker connection -->
+  <line x1="121" y1="330" x2="228" y2="330" class="solidLine" opacity="0">
+    <animate          from="0"      to="0"        dur="0.1s"  id="NPsendMsgs"         begin="3s"                  attributeName="opacity"  fill="freeze" />
+    <animate          from="0"      to="1"        dur="1s"    id="NPP1ToBrLineOpa"    begin="NPMsg1StartDelay.end"  attributeName="opacity"  fill="freeze"/>
+    <animate          from="1"      to="0"        dur="1s"    id="NPRP1ToBrLineOpa"   begin="NPMsg1Move1.end"                     attributeName="opacity"  fill="freeze"/>
+  </line>
+  <path d="M 121,330 l 0,-5 l 10,5 l -10,5 z" transform="translate(107 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+    <animate          from="0"      to="1"        dur="1s"    id="NPP1ToBrArrowOpa"   begin="NPMsg1StartDelay.end"  attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"      to="0"        dur="1s"                          begin="NPMsg1Move1.end"                     attributeName="opacity"   fill="freeze"/>
+  </path>
+
+  <!-- Message #1 -->
+  <circle id="msg1" cx="100" cy="330" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="10"     to="10"       dur=".1s"   id="NPMsg1StartDelay"   begin="NPsendMsgs.end; NPMsg1Loop1.end; NPMsg1Loop2.end" attributeName="r" fill="freeze"/>
+    <animate          from="10"     to="10"       dur="10s"   id="NPMsg1Loop1"        begin="NPMsg1Loop2.end; NPsendMsgs.end" attributeName="r"  fill="freeze"/>
+    <animate          from="10"     to="10"       dur="10s"   id="NPMsg1Loop2"        begin="NPMsg1Loop1.end"        attributeName="r"         fill="freeze"/>
+    <animate          from="0"      to="1"        dur="0.1s"  id="NPMsg1Opa"          begin="NPMsg1StartDelay.end + 1.5s" attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="165 0"    dur="2s"    id="NPMsg1Move1"        begin="NPMsg1Opa.end"          attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="165 0"  to="350 0"    dur="1.6s"  id="NPMsg1Move2"        begin="NPMsg1Move1.end"        attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="350 0"  to="620 0"    dur="2.5s"  id="NPMsg1Move3"        begin="NPMsg1Move2.end"        attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="1s"    id="NPMsg1End"          begin="NPMsg1Move3.end"        attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="1s"                           begin="NPMsg1End.end"          attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+</svg>
+

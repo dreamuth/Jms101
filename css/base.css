@@ -28,3 +28,32 @@ line.solidLine {
   height: 250;
   z-index: -1; 
 }
+
+#svgContainer {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+#svgBackground,
+#svgComponent {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#svgComponent {
+  z-index: 10;
+}
+
+/* Override the default uppercase text-transform
+   for h2-h6 (but retain for h1) */
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  text-transform: none;
+}
