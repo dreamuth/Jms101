@@ -5,32 +5,84 @@ You can receive messages only which you are interested in by using message selec
 When a JMS consumer declares a message selector for a particular destination, the selector is applied only to messages delivered to that consumer. Every JMS client can have a different selector specified for each of its consumers.
 
 
+#### Filtering Messages
+## Creating filtered Consumer
+```java
+String messageSelector = ...
+final MessageConsumer consumer = session.createConsumer(
+    context.lookupQueue("responseQueue"),
+    messageSelector)
+```
+
+
+#### Filtering Messages
+## Message Selectors
+`ReplyTo = 'Text'`  
+`ReplyTo = 'Text'`  
+`ReplyTo = 'Text'`  
+
+
 #### Message Selectors
-    // Send request to get stock price
-    Message requestMessage = session.createObjectMessage("PRO");
-    producer.send(requestMessage);
+### Ask Coke Price
+```java
+// Send request to get coke price
+Message requestMessage = session.createTextMessage("COKE");
+requestMessage.setStringProperty("Region", "USA")
+producer.send(requestMessage);
 
-    // Wait for response for this specific request
-    try (final DistributedConsumer consumer = new DistributedConsumer(
-        session,
-        connection.lookupQueue("responseQueue"),
-        "JMSCorrelationID = '" + jmsRequestMessage.getJMSMessageID() + "'"))
-    {
-        final Message responseMessage = consumer.receive();
-        logger.info("Stock price = " + responseMessage.getObject().toString());
-    }
+// Receive response
+```
 
 
 #### Message Selectors
-### Examples
-    final String selector1 = "NumberOfOrders > 1";
+## Send coke price
+```java
+// Receive the request
+final MessageConsumer consumer = session.createConsumer(
+    context.lookupQueue("requestQueue"),
+    "Region = 'USA'")
+final Message requestMessage = consumer.receive();
 
-    final String selector2 = "age >= 15 AND age <= 19";
+// Send the response
+final MessageProducer producer =
+    session.createProducer(context.lookupQueue("responseQueue"))
 
-    final String selector3 = "JMSType = 'car' AND color = 'blue' AND weight > 2500";
+Message responseMessage = session.createTextMessage("1.5 USD");
+responseMessage.setJMSCorrelationID(requestMessage.getJMSMessageID());
+producer.send(responseMessage);
+```
 
-    final String selector3 = "releaseYear BETWEEN 1980 AND 1989"
 
+#### Message Selectors
+## Receive coke price
+```java
+// Send request to get coke price
+Message requestMessage = session.createTextMessage("COKE");
+requestMessage.setStringProperty("Region", "USA")
+producer.send(requestMessage);
+
+// Receive response
+final MessageConsumer consumer = session.createConsumer(
+    context.lookupQueue("responseQueue"),
+    "JMSCorrelationID = '" + requestMessage.getJMSMessageID() + "'")
+
+final Message responseMessage = consumer.receive();
+logger.info(
+    "Coke price in USA = " + ((TextMessage)responseMessage).getText());
+```
+
+
+#### Message Selectors
+### More Examples
+```java
+final String selector1 = "NumberOfOrders > 1";
+
+final String selector2 = "age >= 15 AND age <= 19";
+
+final String selector3 = "JMSType = 'car' AND color = 'blue' AND weight > 2500";
+
+final String selector3 = "releaseYear BETWEEN 1980 AND 1989"
+```
 
 
 ## Message Delivery Mode

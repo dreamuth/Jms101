@@ -34,8 +34,6 @@ Note: Clients don't need to request for message
 Note: (A message is guaranteed to be delivered once and only once)
 
 
-<!-- #### Advantages of Messaging (JMS)
-## Centralized architecture -->
 ## JMS Version History
 * JMS 1.0.2b (June 26, 2001)
 * JMS 1.1 (April 12, 2002)

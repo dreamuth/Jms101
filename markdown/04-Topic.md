@@ -25,108 +25,101 @@ In the simplest sense, publish-and-subscribe is intended for a one-to-many broad
 ## How to send and receive messages
 
 
-#### How to send a message
-    try (
-        final Connection connection = createConnection();
-        final Session session = createSession();
-        final Producer producer = createProducer())
-    ) {
-        createAndSendMessage();
-    }
-    catch (JMSException e)
-    {
-        // ... handle exception
-    }
+#### How to send a message (skeleton)
+```java
+// Step 1: Create Connection
 
+// Step 2: Create Session
 
-#### How to create connection
-## JNDI
-#### Java Naming and Directory Interface
-    final Connection connection =
-        context.getConnectionFactory().createConnection();
+// Step 3: Create Producer
 
-Note: JNDI is a standard Java extension that provides a uniform API for accessing a variety of directory and naming services
+// Step 4: Create Message
+
+// Step 5: Send Message
+```
 
 
 #### How to send a message (example)
-    try (
-        final Connection connection =
-            context.getConnectionFactory().createConnection();
-        final Session session =
-            connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        final Producer producer =
-            session.createProducer(context.lookupQueue("requestQueue"))
-    ) {
-        Message requestMessage = session.createTextMessage("Test Message");
-        producer.send(requestMessage);
-    }
-    catch (JMSException e)
-    {
-        // ... handle exception
-    }
+```java
+// Step 1: Create Connection
+final Connection connection =
+    context.getConnectionFactory().createConnection();
+// Step 2: Create Session
+final Session session =
+    connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+// Step 3: Create Producer
+final MessageProducer producer =
+    session.createProducer(context.lookupQueue("requestQueue"))
+// Step 4: Create Message
+Message requestMessage = session.createTextMessage("Test Message");
+// Step 5: Send Message
+producer.send(requestMessage);
+```
 
 
-#### How to receive a message synchronously
-    try (
-        final Connection connection = createConnection();
-        final Session session = createSession();
-        final Consumer consumer = createConsumer())
-    ) {
-        receiveMessage();
-    }
-    catch (JMSException e)
-    {
-        // ... handle exception
-    }
+## How to receive a message
+* Synchronously using blocking wait
+* Asynchronously by registering Callback
 
 
-#### How to receive a message synchronously (example)
-    try (
-        final Connection connection =
-            context.getConnectionFactory().createConnection();
-        final Session session =
-            connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        final Producer consumer =
-            session.createConsumer(context.lookupQueue("requestQueue"))
-    ) {
-        TextMessage message = (TextMessage) consumer.receive();
-        System.out.println(message.getText());
-    }
-    catch (JMSException e)
-    {
-        // ... handle exception
-    }
+#### How to receive a message
+#### Synchronously using blocking wait (skeleton)
+```java
+// Step 1: Create Connection
+
+// Step 2: Create Session
+
+// Step 3: Create Consumer
+
+// Step 4: Receive Message
+```
 
 
-#### How to receive a message asynchronously
-    @Override public void run()
-    {
-        try (
-            final Connection connection = createConnection();
-            final Session session = createSession();
-            final Consumer consumer = createConsumer())
-        ) {
-            setMessageListener();
-        }
-    }
-    @Override public void onMessage(Message message)
-    {
-        // Read message
-    }
+#### How to receive a message
+#### Synchronously using blocking wait (example)
+```java
+// Step 1: Create Connection
+// Step 2: Create Session
+// Step 3: Create Consumer
+final MessageConsumer consumer =
+    session.createConsumer(context.lookupQueue("requestQueue"))
+// Step 4: Receive Message
+TextMessage message = (TextMessage) consumer.receive();
+System.out.println(message.getText());
+```
 
 
-#### How to receive a message asynchronously (example)
-    try (
-        final Connection connection =
-            context.getConnectionFactory().createConnection();
-        final Session session =
-            connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        final Producer consumer =
-            session.createConsumer(context.lookupQueue("requestQueue"))
-    ) {
-        consumer.setMessageListener(this);
-    }
-    @Override public void onMessage(Message message)
-    {
-        System.out.println((TextMessage) message.getText());
-    }
+#### How to receive a message
+### Blocking wait with timeout
+```java
+consumer.receive(TimeUnit.MINUTES.toMillis(10));
+```
+
+
+#### How to receive a message
+#### Asynchronously by registering Callback (skeleton)
+```java
+// Step 1: Create Connection
+
+// Step 2: Create Session
+
+// Step 3: Create Consumer
+
+// Step 4: Register Message Handler
+```
+
+
+#### How to receive a message
+#### Asynchronously by registering Callback (example)
+```java
+// Step 1: Create Connection
+// Step 2: Create Session
+// Step 3: Create Consumer
+// Step 4: Register Message Handler
+consumer.setMessageListener(this);
+
+@Override public void onMessage(Message message)
+{
+    System.out.println((TextMessage) message.getText());
+}
+```

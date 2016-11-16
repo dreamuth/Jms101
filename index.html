@@ -15,6 +15,7 @@
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/darcula.css">
     <link rel="stylesheet" href="css/base.css">
     <script>
       document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
@@ -96,11 +97,24 @@
 
         <section
           id="MessageSelectors"
+          data-noescape
           data-markdown="markdown/07-MessageSelectors.md"
           data-separator="^\n\n\n"
           data-separator-vertical="^\n\n"
           data-separator-notes="^Note:"
         ></section>
+
+        <section>
+          <div class="animate" id="NPAnimiation" data-svg-src="svg/NonPersistent.svg">
+            <svg height=900 class="svgComponent"/>
+          </div>
+        </section>
+
+        <section>
+          <div class="animate" id="PAnimiation" data-svg-src="svg/Persistent.svg">
+            <svg height=900 class="svgComponent"/>
+          </div>
+        </section>
 
         <section
           id="DesignPatterns"
@@ -118,6 +132,15 @@
           data-separator-notes="^Note:"
         ></section>
 
+        <section>
+            <pre><code data-trim data-noescape>
+        (def lazy-fib
+          (concat
+           [0 1]
+           <mark>((fn rfib [a b]</mark>
+                (lazy-cons (+ a b) (rfib b (+ a b)))) 0 1)))
+            </code></pre>
+        </section>
         </div>
     </div>
 

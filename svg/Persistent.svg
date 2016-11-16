@@ -1,0 +1,117 @@
+<svg
+	id="PersistenceAnimationSVG"
+	version="1.1"
+	width="1000"
+	height="800"
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <image xlink:href="image/PersistenceBefore.png"  x="0" y="-100" width="1000" height="800">
+    <animate          from="1"          to="0"            dur="0.3s"  id="PAImg1Opa"    begin="PAMsg6Move2.end + 1s"     attributeName="opacity"   fill="freeze"/>
+    <animate          from="0"          to="1"            dur="0.3s"  id="PAImg1OpaR"   begin="PAImg1Opa.end + 4s"       attributeName="opacity"   fill="freeze"/>
+  </image>    
+	<image xlink:href="image/PersistenceAfter.png"  x="0" y="-100" width="1000" height="800" opacity="0">
+    <animate          from="0"          to="1"            dur="0.3s"  id="PAImg2Opa"    begin="PAImg1Opa.begin"          attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"          to="0"            dur="0.3s"  id="PAImg2OpaR"   begin="PAImg1OpaR.begin"         attributeName="opacity"   fill="freeze"/>
+  </image>    
+
+  <!-- Consumer to Broker Connection -->
+  <line x1="780" y1="300" x2="610" y2="300" class="solidLine" opacity="0" style="stroke-dasharray: 10">
+    <animate          from="0"      to="1"        dur=".1s"    id="PAC2ToBrLineOpa"    begin="PAMsg1Wait.end;PAMsg2Wait.end;PAMsg3Wait.end;PAMsg4Wait.end;PAMsg5Wait.end;PAMsg6Wait.end"              attributeName="opacity"  fill="freeze"/>
+    <animate          from="1"      to="0"        dur=".1s"    id="PARC2ToBrLineOpa"   begin="PAMsg1Move3.end;PAMsg2Move3.end;PAMsg3Move3.end;PAMsg4Move3.end;PAMsg5Move3.end;PAMsg6Move3.end"             attributeName="opacity"  fill="freeze"/>
+  </line>
+  <path d="M 780,300 l 0,-5 l -10,5 l 10,5 z" transform="translate(-163 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+    <animate          from="0"      to="1"        dur=".1s"                             begin="PAC2ToBrLineOpa.begin"      attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"      to="0"        dur=".1s"                             begin="PARC2ToBrLineOpa.begin"     attributeName="opacity"   fill="freeze"/>
+  </path>
+  <image xlink:href="svg/settings.svg" x="910" y="260" height="44px" width="44px" opacity="0">
+    <animate          from="0"          to="1"            dur="0.1s"  id="PAC2WorkOpa"    begin="PARC2ToBrLineOpa.begin"     attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 932 282"  to="180 932 282"   dur="1s"    id="PAC2WorkRotate" begin="PAC2WorkOpa.end"     attributeName="transform" type="rotate" />
+    <animate          from="1"          to="0"            dur="0.1s"  id="PARC2WorkOpa"   begin="PAC2WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
+  </image>
+
+  <!-- Producer to Broker connection -->
+  <line x1="220" y1="300" x2="368" y2="300" class="solidLine" opacity="0">
+    <animate          from="0"      to="0"        dur=".1s"   id="PASendMsg"          begin="PAMsg6Reset.end + 2s"                             attributeName="opacity"  fill="freeze" class="fragment"/>
+    <animate          from="0"      to="1"        dur="1s"    id="PAP1ToBrLineOpa"    begin="PASendMsg.end;PASendMsg.end + 18s"               attributeName="opacity"  fill="freeze"/>
+    <animate          from="1"      to="0"        dur="1s"    id="PARP1ToBrLineOpa"   begin="PAMsg3Move2.end;PAMsg6Move2.end"             attributeName="opacity"  fill="freeze"/>
+  </line>
+  <path d="M 250,300 l 0,-5 l 10,5 l -10,5 z" transform="translate(107 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+    <animate          from="0"      to="1"        dur="1s"    id="PAP1ToBrArrowOpa"   begin="PAP1ToBrLineOpa.begin"       attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"      to="0"        dur="1s"                             begin="PARP1ToBrLineOpa.begin"      attributeName="opacity"   fill="freeze"/>
+  </path>
+
+  <!-- Message #1 -->
+  <circle id="msg1" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="PAMsg1Opa"          begin="PASendMsg.end + 1s"          attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="300 0"    dur="2s"    id="PAMsg1Move1"        begin="PAMsg1Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="300 0"  to="300 186"  dur="1.5s"  id="PAMsg1Move2"        begin="PAMsg1Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="3s"    id="PAMsg1Wait"         begin="PAMsg1Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="300 186" to="300 0"   dur=".5s"   id="PAMsg1Move3p"       begin="PAMsg1Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="300 0"  to="650 0"    dur="1.5s"  id="PAMsg1Move3"        begin="PAMsg1Move3p.end"            attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="PAMsg1OpaEnd"       begin="PAMsg1Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="PAMsg1Reset"        begin="PAMsg1OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #2 -->
+  <circle id="msg2" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="PAMsg2Opa"          begin="PASendMsg.end + 2s"          attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="280 0"    dur="2s"    id="PAMsg2Move1"        begin="PAMsg2Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="280 0"  to="280 186"  dur="1.5s"  id="PAMsg2Move2"        begin="PAMsg2Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="6s"    id="PAMsg2Wait"         begin="PAMsg2Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="280 186" to="280 0"   dur=".5s"   id="PAMsg2Move3p"       begin="PAMsg2Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="280 0"  to="650 0"    dur="1.5s"  id="PAMsg2Move3"        begin="PAMsg2Move3p.end"            attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="PAMsg2OpaEnd"       begin="PAMsg2Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="PAMsg2Reset"        begin="PAMsg2OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #3 -->
+  <circle id="msg3" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="PAMsg3Opa"          begin="PASendMsg.end + 3s"          attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="260 0"    dur="2s"    id="PAMsg3Move1"        begin="PAMsg3Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="260 0"  to="260 186"  dur="1.5s"  id="PAMsg3Move2"        begin="PAMsg3Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="9s"    id="PAMsg3Wait"         begin="PAMsg3Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="260 186" to="260 0"   dur=".5s"   id="PAMsg3Move3p"       begin="PAMsg3Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="260 0"  to="650 0"    dur="1.5s"  id="PAMsg3Move3"        begin="PAMsg3Move3p.end"            attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="PAMsg3OpaEnd"       begin="PAMsg3Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="PAMsg3Reset"        begin="PAMsg3OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #4 -->
+  <circle id="msg4" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="PAMsg4Opa"          begin="PASendMsg.end + 18s"         attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="300 0"    dur="2s"    id="PAMsg4Move1"        begin="PAMsg4Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="300 0"  to="300 186"  dur="1.5s"  id="PAMsg4Move2"        begin="PAMsg4Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="9s"    id="PAMsg4Wait"         begin="PAMsg4Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="300 186" to="300 0"   dur=".5s"   id="PAMsg4Move3p"       begin="PAMsg4Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="300 0"  to="650 0"    dur="1.5s"  id="PAMsg4Move3"        begin="PAMsg4Move3p.end"            attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="PAMsg4OpaEnd"       begin="PAMsg4Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="PAMsg4Reset"        begin="PAMsg4OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #5 -->
+  <circle id="msg5" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="PAMsg5Opa"          begin="PASendMsg.end + 19s"         attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="280 0"    dur="2s"    id="PAMsg5Move1"        begin="PAMsg5Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="280 0"  to="280 186"  dur="1.5s"  id="PAMsg5Move2"        begin="PAMsg5Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="12s"   id="PAMsg5Wait"         begin="PAMsg5Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="280 186" to="280 0"   dur=".5s"   id="PAMsg5Move3p"       begin="PAMsg5Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="280 0"  to="650 0"    dur="1.5s"  id="PAMsg5Move3"        begin="PAMsg5Move3p.end"            attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="PAMsg5OpaEnd"       begin="PAMsg5Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="PAMsg5Reset"        begin="PAMsg5OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #6 -->
+  <circle id="msg6" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="PAMsg6Opa"          begin="PASendMsg.end + 20s"         attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="260 0"    dur="2s"    id="PAMsg6Move1"        begin="PAMsg6Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="260 0"  to="260 186"  dur="1.5s"  id="PAMsg6Move2"        begin="PAMsg6Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="15s"   id="PAMsg6Wait"         begin="PAMsg6Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="260 186" to="260 0"   dur=".5s"   id="PAMsg6Move3p"       begin="PAMsg6Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="260 0"  to="650 0"    dur="1.5s"  id="PAMsg6Move3"        begin="PAMsg6Move3p.end"            attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="PAMsg6OpaEnd"       begin="PAMsg6Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="PAMsg6Reset"        begin="PAMsg6OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+</svg>
