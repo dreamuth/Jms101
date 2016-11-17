@@ -1,3 +1,7 @@
+## Filtering Messages
+
+
+#### Filtering Messages
 ## Message Selectors
 Based on a subset of the SQL92 conditional expression syntax.
 Note:
@@ -5,70 +9,61 @@ You can receive messages only which you are interested in by using message selec
 When a JMS consumer declares a message selector for a particular destination, the selector is applied only to messages delivered to that consumer. Every JMS client can have a different selector specified for each of its consumers.
 
 
-#### Filtering Messages
-## Creating filtered Consumer
-```java
-String messageSelector = ...
-final MessageConsumer consumer = session.createConsumer(
-    context.lookupQueue("responseQueue"),
-    messageSelector)
-```
+![](image/Filter1.png)
 
 
 #### Filtering Messages
-## Message Selectors
-`ReplyTo = 'Text'`  
-`ReplyTo = 'Text'`  
-`ReplyTo = 'Text'`  
-
-
-#### Message Selectors
-### Ask Coke Price
+### Ask Coke Price (Producer X)
 ```java
 // Send request to get coke price
 Message requestMessage = session.createTextMessage("COKE");
-requestMessage.setStringProperty("Region", "USA")
+requestMessage.setStringProperty("Region", "INDIA")
 producer.send(requestMessage);
 
 // Receive response
 ```
 
 
-#### Message Selectors
-## Send coke price
+![](image/Filter1.png)
+
+
+#### Filtering Messages
+### Receive request for India (Consumer 3)
 ```java
+// Create Consumer for Region India
+MessageConsumer consumer = session.createConsumer(
+    context.lookupQueue("req Q"),
+    "Region = 'INDIA'");
+
 // Receive the request
-final MessageConsumer consumer = session.createConsumer(
-    context.lookupQueue("requestQueue"),
-    "Region = 'USA'")
-final Message requestMessage = consumer.receive();
+```
 
+
+![](image/Filter2.png)
+
+
+#### Filtering Messages
+### Send coke price (Producer 3)
+```java
 // Send the response
-final MessageProducer producer =
-    session.createProducer(context.lookupQueue("responseQueue"))
-
-Message responseMessage = session.createTextMessage("1.5 USD");
+Message responseMessage = session.createTextMessage("40 INR");
 responseMessage.setJMSCorrelationID(requestMessage.getJMSMessageID());
 producer.send(responseMessage);
 ```
 
 
-#### Message Selectors
-## Receive coke price
-```java
-// Send request to get coke price
-Message requestMessage = session.createTextMessage("COKE");
-requestMessage.setStringProperty("Region", "USA")
-producer.send(requestMessage);
+![](image/Filter3.png)
 
-// Receive response
-final MessageConsumer consumer = session.createConsumer(
-    context.lookupQueue("responseQueue"),
+
+#### Filtering Messages
+### Receive coke price
+```java
+// Create Consumer for request message id
+MessageConsumer consumer = session.createConsumer(
+    context.lookupQueue("res Q"),
     "JMSCorrelationID = '" + requestMessage.getJMSMessageID() + "'")
 
-final Message responseMessage = consumer.receive();
-logger.info(
-    "Coke price in USA = " + ((TextMessage)responseMessage).getText());
+// Receive response
 ```
 
 

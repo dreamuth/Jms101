@@ -27,7 +27,7 @@
   </path>
   <image xlink:href="svg/settings.svg" x="910" y="260" height="44px" width="44px" opacity="0">
     <animate          from="0"          to="1"            dur="0.1s"  id="PAC2WorkOpa"    begin="PARC2ToBrLineOpa.begin"     attributeName="opacity"   fill="freeze"/>
-    <animateTransform from="0 932 282"  to="180 932 282"   dur="1s"    id="PAC2WorkRotate" begin="PAC2WorkOpa.end"     attributeName="transform" type="rotate" />
+    <animateTransform from="0 932 282"  to="180 932 282"  dur="1s"    id="PAC2WorkRotate" begin="PAC2WorkOpa.end"     attributeName="transform" type="rotate" />
     <animate          from="1"          to="0"            dur="0.1s"  id="PARC2WorkOpa"   begin="PAC2WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
   </image>
 

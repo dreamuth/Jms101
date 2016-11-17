@@ -72,6 +72,27 @@ Note: Message properties are additional headers that can be assigned to a messag
 
 
 #### Anatomy of a JMS Message
+## Properties
+```java
+    message.setBooleanProperty("Boolean value", true);
+
+    message.setStringProperty("String value", "USA");
+
+    message.setFloatProperty("Float value", 453.54F);
+
+    message.setDoubleProperty("Double value", 32.345221);
+
+    message.setByteProperty("Byte value", (byte) 100);
+
+    message.setShortProperty("Short value", (short) 155);
+
+    message.setIntProperty("Int value", 5486);
+
+    message.setLongProperty("Long value", 45897456);
+```
+
+
+#### Anatomy of a JMS Message
 ## Payload
 Note: Actual message payload, Stream, bytes, object, text and map
 
@@ -108,3 +129,14 @@ Note: A StreamMessage object's message body contains a stream of primitive value
 #### Message types
 ### javax.jms.MapMessage
 Note: A MapMessage object's message body contains a set of name-value pairs, where names are String objects, and values are Java primitives. The entries can be accessed sequentially or randomly by name. The order of the entries is undefined
+
+
+### Message types Summary
+Message Type  | Usage
+------------ | -----
+Message | Header only
+TextMessage |  Java String
+ObjectMessage | Serializable Java object
+BytesMessage | Stream of uninterpreted bytes
+StreamMessage | Stream of Java primitives
+MapMessage | name-value pairs, names are Strings , values are Java primitives

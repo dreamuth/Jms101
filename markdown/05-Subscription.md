@@ -117,28 +117,45 @@ public void onMessage(Message message)
 ```
 
 
+#### Session Summary
+Session  | Delivery
+------------ | -----
+Auto | Only once
+Dups OK | At least once
+Client | Redelivery controls
+Transacted | Rollback and Redelivery controls
+
+
+
 ## Group Messages
 
 
-#### Group Messages
+### Group Messages
 ```java
-// send an empty payload message starting the group
-BytesMessage msgStart = session.createBytesMessage();
-msgStart.setStringProperty("SequenceMarker", "START_SEQUENCE");
-sender.send(msgStart);
+    TextMessage msg1 = session.createTextMessage("Message 1");
+    msg1.setStringProperty("JMSXGroupID", "Group1");
+    sender.send(msg1);
 
-// now send the messages
-TextMessage msg1 = session.createTextMessage(messagePayload);
-sender.send(msg1);
-TextMessage msg2 = session.createTextMessage(messagePayload);
-sender.send(msg2);
-...
+    TextMessage msg2 = session.createTextMessage("Message 2");
+    msg2.setStringProperty("JMSXGroupID", "Group1");
+    sender.send(msg2);
 
-// send an empty payload message ending the group
-BytesMessage msgEnd = session.createBytesMessage();
-msgEnd.setStringProperty("SequenceMarker", "END_SEQUENCE");
-sender.send(msgEnd);
+    // Send more messages
+    .
+    .
+    .
+
+    TextMessage msgn = session.createTextMessage("Message n");
+    msgn.setStringProperty("JMSXGroupID", "Group1");
+    sender.send(msgn);
 ```
+
+
+### How to reset Group
+```java
+    message.setIntProperty("JMSXGroupSeq", -1);
+```
+
 
 
 ## Subscription Types
@@ -183,3 +200,12 @@ Note: If you want to share the work load.
         "TopicName",
         "SharedSubscriptionName");
 ```
+
+
+#### Subscription Summary
+Subscription  | Behavior
+------------ | -----
+Non-Durable | No Guaranty, No work distribution
+Durable | Guaranty, No work distribution
+Shared-Non-Durable (JMS 2.0) | No Guaranty, Work distribution
+Shared-Durable (JMS 2.0)| Guaranty, Work distribution
