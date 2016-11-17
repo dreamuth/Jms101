@@ -74,7 +74,7 @@ Note: This acknowledgment mode instructs the session to lazily acknowledge the d
     final Session session =
         connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
 ```
-Note: With this acknowledgment mode, the client acknowledges a consumed message by calling the message's acknowledge method. Acknowledging a consumed message acknowledges all messages that the session has consumed.
+Note: With this acknowledgment mode, the client acknowledges a consumed message by calling the message's acknowledge method. 
 
 
 #### Message Acknowledgments
