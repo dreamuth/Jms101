@@ -78,21 +78,36 @@ Note: Message properties are additional headers that can be assigned to a messag
 ## Properties
 ```java
     message.setBooleanProperty("Boolean value", true);
-
+```
+<!-- .element: class="fragment" -->
+```java
     message.setStringProperty("String value", "USA");
-
+```
+<!-- .element: class="fragment" -->
+```java
     message.setFloatProperty("Float value", 453.54F);
-
+```
+<!-- .element: class="fragment" -->
+```java
     message.setDoubleProperty("Double value", 32.345221);
-
+```
+<!-- .element: class="fragment" -->
+```java
     message.setByteProperty("Byte value", (byte) 100);
-
+```
+<!-- .element: class="fragment" -->
+```java
     message.setShortProperty("Short value", (short) 155);
-
+```
+<!-- .element: class="fragment" -->
+```java
     message.setIntProperty("Int value", 5486);
-
+```
+<!-- .element: class="fragment" -->
+```java
     message.setLongProperty("Long value", 45897456);
 ```
+<!-- .element: class="fragment" -->
 
 
 #### Anatomy of a JMS Message
