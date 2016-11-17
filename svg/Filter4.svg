@@ -1,0 +1,17 @@
+<svg
+	id="Filter4AnimationSVG"
+	version="1.1"
+	width="1000"
+	height="800"
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <image xlink:href="image/Filter3.png"  x="0" y="-100" width="1000" height="800"/>
+
+  <!-- Message #1 -->
+  <circle id="msg1" cx="410" cy="390" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="1">
+    <animateTransform from="0 0"    to="-250 -20"    dur="2s"    id="Filter4Msg1Move1" begin="" class="fragment"  attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+</svg>

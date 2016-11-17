@@ -1,0 +1,30 @@
+<svg
+    id="Filter3AnimationSVG"
+    version="1.1"
+    width="1000"
+    height="800"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <image xlink:href="image/Filter2.png"  x="0" y="-100" width="1000" height="800"/>
+
+  <!-- Response producer to Q -->
+  <line x1="785" y1="540" x2="612" y2="385" class="solidLine" opacity="0">
+    <animate          from="0"      to="1"        dur="1s"   id="Filter3Start"    begin=""   attributeName="opacity"   fill="freeze" class="fragment" />
+    <animate          from="1"      to="0"        dur=".2s"  id="Filter3End"      begin="Filter3Msg1Move2.end"   attributeName="opacity"   fill="freeze"/>
+  </line>
+  <path d="M 785,550 l -4,4 l -4,-12 l 12,4 z" transform="translate(-168 -160)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+    <animate          from="0"      to="1"        dur="1s"                        begin="Filter3Start.begin"   attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"      to="0"        dur=".2s"                       begin="Filter3End.begin"     attributeName="opacity"   fill="freeze"/>
+  </path>
+
+  <!-- Message #1 -->
+  <circle id="msg1" cx="810" cy="533" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"          to="1"          dur="0.1s"   id="Filter3Msg1Opa"     begin="Filter3Start.end"          attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"        to="-20 0"     dur=".1s"     id="Filter3Msg1Move1"   begin="Filter3Msg1Opa.end"        attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="-20 0"      to="-200 -150"  dur="1.6s"   id="Filter3Msg1Move2"   begin="Filter3Msg1Move1.end"      attributeName="transform" fill="freeze" type="translate"/>
+    <animateTransform from="-200 -150"  to="-400 -150"  dur="1s"     id="Filter3Msg1Move3"   begin="Filter3Msg1Move2.end"      attributeName="transform" fill="freeze" type="translate"/>
+  </circle>
+
+</svg>

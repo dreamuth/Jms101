@@ -1,4 +1,7 @@
 ## Message
+
+
+## Message
 * Anatomy of a JMS Message
 * Message types
 

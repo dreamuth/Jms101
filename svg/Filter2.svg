@@ -1,0 +1,19 @@
+<svg
+	id="Filter2AnimationSVG"
+	version="1.1"
+	width="1000"
+	height="800"
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <image xlink:href="image/Filter1.png"  x="0" y="-100" width="1000" height="800"/>
+
+  <!-- Message #1 -->
+  <circle id="msg1" cx="580" cy="260" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="1">
+    <animateTransform from="0 0"    	to="40 0"       dur=".2s"    id="Filter2Msg1Move1" begin="" 					attributeName="transform" fill="freeze" type="translate" class="fragment" />
+    <animateTransform from="40 0"   	to="200 200"    dur="1.4s"   id="Filter2Msg1Move2" begin="Filter2Msg1Move1.end" attributeName="transform" fill="freeze" type="translate"/>
+    <animateTransform from="200 200"   	to="300 200"    dur=".4s"    id="Filter2Msg1Move3" begin="Filter2Msg1Move2.end" attributeName="transform" fill="freeze" type="translate"/>
+  </circle>
+
+</svg>
