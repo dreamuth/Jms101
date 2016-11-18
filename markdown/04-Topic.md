@@ -1,11 +1,11 @@
 #### Topic
 ## Publish/Subscribe Messaging (Pub-Sub)
-Note: A distribution mechanism for publishing messages that are delivered to multiple subscribers.
-In the simplest sense, publish-and-subscribe is intended for a one-to-many broadcast of messages
 
 
 #### Topic
 ## Delivered to multiple consumer (Subscribers)
+Note: A distribution mechanism for publishing messages that are delivered to multiple subscribers.
+In the simplest sense, publish-and-subscribe is intended for a one-to-many broadcast of messages
 
 
 #### Topic

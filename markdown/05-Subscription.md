@@ -1,4 +1,14 @@
+#### Connection
+#### Session
+#### Producer/Consumer
+#### Message
+
+
+
 ## Connection
+#### Session
+#### Producer/Consumer
+#### Message
 
 
 #### How to create a connection
@@ -20,7 +30,10 @@ Note: JNDI is a standard Java extension that provides a uniform API for accessin
 
 
 
+#### Connection
 ## Session
+#### Producer/Consumer
+#### Message
 
 
 #### Message Acknowledgments
@@ -74,7 +87,7 @@ Note: This acknowledgment mode instructs the session to lazily acknowledge the d
     final Session session =
         connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
 ```
-Note: With this acknowledgment mode, the client acknowledges a consumed message by calling the message's acknowledge method. 
+Note: With this acknowledgment mode, the client acknowledges a consumed message by calling the message's acknowledge method.
 
 
 #### Message Acknowledgments
@@ -127,13 +140,29 @@ Transacted | Rollback and Redelivery controls
 
 
 
+#### Connection
+#### Session
+## Producer/Consumer
+#### Message
+
+
+### Producer/Consumer
+```java
+    MessageProducer producer = session.createProducer(
+        context.lookupTopic("TopicName"));
+    MessageConsumer consumer = session.createConsumer(
+        context.lookupQueue("QueueName"));
+```
+
+
 ## Subscription Types
 
 
 #### Subscription Types
 ## Non-Durable Subscription
 ```java
-    MessageConsumer consumer = session.createConsumer("TopicName");
+    MessageConsumer consumer = session.createConsumer(
+        context.lookupTopic("TopicName"));
 ```
 Note: Nondurable subscribers receive messages only when they are actively listening on that topic. Otherwise, the message is gone
 
@@ -142,7 +171,7 @@ Note: Nondurable subscribers receive messages only when they are actively listen
 ## Durable Subscription
 ```java
     MessageConsumer consumer = session.createDurableConsumer(
-        "TopicName",
+        context.lookupTopic("TopicName"),
         "SubscriptionName");
 ```
 Note: Durable subscribers, on the other hand, will receive all messages sent to that topic, regardless of whether that subscriber is active or not
@@ -157,7 +186,7 @@ Note: If you want to share the work load.
 ## Shared Non-Durable Subscriptions
 ```java
     MessageConsumer consumer = createSharedConsumer(
-        "TopicName",
+        context.lookupTopic("TopicName"),
         "SharedSubscriptionName");
 ```
 
@@ -166,7 +195,7 @@ Note: If you want to share the work load.
 ## Shared Durable Subscriptions
 ```java
     MessageConsumer consumer = createSharedDurableConsumer(
-        "TopicName",
+        context.lookupTopic("TopicName"),
         "SharedSubscriptionName");
 ```
 

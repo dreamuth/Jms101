@@ -28,7 +28,7 @@ Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 <!-- .element: class="fragment" -->
 ```java
 // Step 3: Create Producer
-MessageProducer producer = session.createProducer(context.lookupQueue("Q1"))
+MessageProducer producer = session.createProducer(context.lookupQueue("Q1"));
 ```
 <!-- .element: class="fragment" -->
 ```java
