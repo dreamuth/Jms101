@@ -11,7 +11,7 @@ Note: A JMS provider is a messaging system that implements the JMS interfaces an
 
 ## JMS Brokers
 ![](image/Brokers.png)
-Note: Cloud based JMS, Tons of open source message brokers and some proprietary message brokers
+Note: Cloud based JMS, Tons of open source message brokers and some commercial message brokers
 
 
 #### JMS Concepts

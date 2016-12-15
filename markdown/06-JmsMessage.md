@@ -1,3 +1,10 @@
+
+#### Connection
+#### Session
+#### Producer/Consumer
+## Message
+
+
 ## Message
 * Anatomy of a JMS Message
 * Message types
@@ -72,6 +79,42 @@ Note: Message properties are additional headers that can be assigned to a messag
 
 
 #### Anatomy of a JMS Message
+## Properties
+```java
+    message.setBooleanProperty("Boolean value", true);
+```
+<!-- .element: class="fragment" -->
+```java
+    message.setStringProperty("String value", "USA");
+```
+<!-- .element: class="fragment" -->
+```java
+    message.setFloatProperty("Float value", 453.54F);
+```
+<!-- .element: class="fragment" -->
+```java
+    message.setDoubleProperty("Double value", 32.345221);
+```
+<!-- .element: class="fragment" -->
+```java
+    message.setByteProperty("Byte value", (byte) 100);
+```
+<!-- .element: class="fragment" -->
+```java
+    message.setShortProperty("Short value", (short) 155);
+```
+<!-- .element: class="fragment" -->
+```java
+    message.setIntProperty("Int value", 5486);
+```
+<!-- .element: class="fragment" -->
+```java
+    message.setLongProperty("Long value", 45897456);
+```
+<!-- .element: class="fragment" -->
+
+
+#### Anatomy of a JMS Message
 ## Payload
 Note: Actual message payload, Stream, bytes, object, text and map
 
@@ -81,30 +124,41 @@ Note: Actual message payload, Stream, bytes, object, text and map
 
 
 #### Message types
-## Message
+### javax.jms.Message
 Note: The Message interface is the root interface of all JMS messages. A Message object holds all the standard message header information. It can be sent when a message containing only header information is sufficient.
 
 
 #### Message types
-## TextMessage
+### javax.jms.TextMessage
 Note: A TextMessage object's message body contains a java.lang.String object. This message type can be used to transport plain-text messages, and XML messages.
 
 
 #### Message types
-## ObjectMessage
+### javax.jms.ObjectMessage
 Note: An ObjectMessage object's message body contains a Serializable Java object.
 
 
 #### Message types
-## BytesMessage
+### javax.jms.BytesMessage
 Note: A BytesMessage object's message body contains a stream of uninterpreted bytes. This message type is for literally encoding a body to match an existing message format. In many cases, it is possible to use one of the other body types, which are easier to use. Although the JMS API allows the use of message properties with byte messages, they are typically not used, since the inclusion of properties may affect the format.
 
 
 #### Message types
-## StreamMessage
+### javax.jms.StreamMessage
 Note: A StreamMessage object's message body contains a stream of primitive values in the Java programming language ("Java primitives"). It is filled and read sequentially.
 
 
 #### Message types
-## MapMessage
+### javax.jms.MapMessage
 Note: A MapMessage object's message body contains a set of name-value pairs, where names are String objects, and values are Java primitives. The entries can be accessed sequentially or randomly by name. The order of the entries is undefined
+
+
+### Message types Summary
+Message Type  | Usage
+------------ | -----
+Message | Header only
+TextMessage |  Java String
+ObjectMessage | Serializable Java object
+BytesMessage | Stream of uninterpreted bytes
+StreamMessage | Stream of Java primitives
+MapMessage | name-value pairs, names are Strings , values are Java primitives

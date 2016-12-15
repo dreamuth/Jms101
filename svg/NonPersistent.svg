@@ -1,0 +1,111 @@
+<svg
+	id="NonPersistenceAnimationSVG"
+	version="1.1"
+	width="1000"
+	height="800"
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <image xlink:href="image/NonPersistenceBefore.png"  x="0" y="-100" width="1000" height="800">
+    <animate          from="1"          to="0"            dur="0.3s"  id="NPAImg1Opa"    begin="NPAMsg6Move2.end + 1s"     attributeName="opacity"   fill="freeze"/>
+    <animate          from="0"          to="1"            dur="0.3s"  id="NPAImg1OpaR"   begin="NPAImg1Opa.end + 4s"       attributeName="opacity"   fill="freeze"/>
+  </image>    
+	<image xlink:href="image/NonPersistenceAfter.png"  x="0" y="-100" width="1000" height="800" opacity="0">
+    <animate          from="0"          to="1"            dur="0.3s"  id="NPAImg2Opa"    begin="NPAImg1Opa.begin"          attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"          to="0"            dur="0.3s"  id="NPAImg2OpaR"   begin="NPAImg1OpaR.begin"         attributeName="opacity"   fill="freeze"/>
+  </image>    
+
+  <!-- Consumer to Broker Connection -->
+  <line x1="780" y1="300" x2="610" y2="300" class="solidLine" opacity="0" style="stroke-dasharray: 10">
+    <animate          from="0"      to="1"        dur=".1s"    id="NPAC2ToBrLineOpa"    begin="NPAMsg1Wait.end;NPAMsg2Wait.end;NPAMsg3Wait.end"              attributeName="opacity"  fill="freeze"/>
+    <animate          from="1"      to="0"        dur=".1s"    id="NPARC2ToBrLineOpa"   begin="NPAMsg1Move3.end;NPAMsg2Move3.end;NPAMsg3Move3.end"             attributeName="opacity"  fill="freeze"/>
+  </line>
+  <path d="M 780,300 l 0,-5 l -10,5 l 10,5 z" transform="translate(-163 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+    <animate          from="0"      to="1"        dur=".1s"                             begin="NPAC2ToBrLineOpa.begin"      attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"      to="0"        dur=".1s"                             begin="NPARC2ToBrLineOpa.begin"     attributeName="opacity"   fill="freeze"/>
+  </path>
+  <image xlink:href="svg/settings.svg" x="910" y="260" height="44px" width="44px" opacity="0">
+    <animate          from="0"          to="1"            dur="0.1s"  id="NPAC2WorkOpa"    begin="NPARC2ToBrLineOpa.begin"     attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 932 282"  to="180 932 282"   dur="1s"    id="NPAC2WorkRotate" begin="NPAC2WorkOpa.end"     attributeName="transform" type="rotate" />
+    <animate          from="1"          to="0"            dur="0.1s"  id="NPARC2WorkOpa"   begin="NPAC2WorkRotate.end"  attributeName="opacity"   fill="freeze"/>
+  </image>
+
+  <!-- Producer to Broker connection -->
+  <line x1="220" y1="300" x2="368" y2="300" class="solidLine" opacity="0">
+    <animate          from="0"      to="0"        dur=".1s"   id="NPASendMsg"          begin="NPAImg1OpaR.end + 1s"                             attributeName="opacity"  fill="freeze" class="fragment"/>
+    <animate          from="0"      to="1"        dur="1s"    id="NPAP1ToBrLineOpa"    begin="NPASendMsg.end;NPASendMsg.end + 18s"               attributeName="opacity"  fill="freeze"/>
+    <animate          from="1"      to="0"        dur="1s"    id="NPARP1ToBrLineOpa"   begin="NPAMsg2Move2.end;NPAMsg5Move2.end"             attributeName="opacity"  fill="freeze"/>
+  </line>
+  <path d="M 250,300 l 0,-5 l 10,5 l -10,5 z" transform="translate(107 0)" style="fill:red;stroke:red;stroke-width:1" opacity="0">
+    <animate          from="0"      to="1"        dur="1s"    id="NPAP1ToBrArrowOpa"   begin="NPAP1ToBrLineOpa.begin"       attributeName="opacity"   fill="freeze"/>
+    <animate          from="1"      to="0"        dur="1s"                             begin="NPARP1ToBrLineOpa.begin"      attributeName="opacity"   fill="freeze"/>
+  </path>
+
+  <!-- Message #1 -->
+  <circle id="msg1" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="NPAMsg1Opa"          begin="NPASendMsg.end + 1s"          attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="175 0"    dur="2s"    id="NPAMsg1Move1"        begin="NPAMsg1Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="175 0"  to="380 0"    dur="1.6s"  id="NPAMsg1Move2"        begin="NPAMsg1Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="3s"    id="NPAMsg1Wait"         begin="NPAMsg1Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="380 0"  to="650 0"    dur="2s"    id="NPAMsg1Move3"        begin="NPAMsg1Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="NPAMsg1OpaEnd"       begin="NPAMsg1Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="NPAMsg1Reset"        begin="NPAMsg1OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #2 -->
+  <circle id="msg2" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="NPAMsg2Opa"          begin="NPASendMsg.end + 2s"          attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="175 0"    dur="2s"    id="NPAMsg2Move1"        begin="NPAMsg2Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="175 0"  to="360 0"    dur="1.6s"  id="NPAMsg2Move2"        begin="NPAMsg2Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="6s"    id="NPAMsg2Wait"         begin="NPAMsg2Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="360 0"  to="650 0"    dur="2s"    id="NPAMsg2Move3"        begin="NPAMsg2Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="NPAMsg2OpaEnd"       begin="NPAMsg2Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="NPAMsg2Reset"        begin="NPAMsg2OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #3 -->
+  <circle id="msg3" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="NPAMsg3Opa"          begin="NPASendMsg.end + 3s"          attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="175 0"    dur="2s"    id="NPAMsg3Move1"        begin="NPAMsg3Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="175 0"  to="340 0"    dur="1.6s"  id="NPAMsg3Move2"        begin="NPAMsg3Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="1"        dur="9s"    id="NPAMsg3Wait"         begin="NPAMsg3Move2.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="340 0"  to="650 0"    dur="2s"    id="NPAMsg3Move3"        begin="NPAMsg3Wait.end + 0.2s"       attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="1"      to="0"        dur="0.1s"  id="NPAMsg3OpaEnd"       begin="NPAMsg3Move3.end"             attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="NPAMsg3Reset"        begin="NPAMsg3OpaEnd.end"            attributeName="transform" fill="freeze" type="translate" />
+  </circle>
+
+  <!-- Message #4 -->
+  <circle id="msg4" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="NPAMsg4Opa"          begin="NPASendMsg.end + 18s"         attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="175 0"    dur="2s"    id="NPAMsg4Move1"        begin="NPAMsg4Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="175 0"  to="380 0"    dur="1.6s"  id="NPAMsg4Move2"        begin="NPAMsg4Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="#ff0000" to="#a5a5a5" dur="0.3s"  id="NPAMsg4Color"        begin="NPAImg1Opa.begin"             attributeName="fill"      fill="freeze"/>
+    <animate          from="1"      to="0"        dur="0.1s"  id="NPAMsg4OpaR"         begin="NPAImg1OpaR.begin"            attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="NPAMsg4Reset"        begin="NPAMsg4OpaR.end"              attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="#a5a5a5" to="#ff0000" dur="0.3s"                           begin="NPAMsg4OpaR.end"              attributeName="fill"      fill="freeze"/>
+  </circle>
+
+  <!-- Message #5 -->
+  <circle id="msg5" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="NPAMsg5Opa"          begin="NPASendMsg.end + 19s"         attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="175 0"    dur="2s"    id="NPAMsg5Move1"        begin="NPAMsg5Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="175 0"  to="360 0"    dur="1.6s"  id="NPAMsg5Move2"        begin="NPAMsg5Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="#ff0000" to="#a5a5a5" dur="0.3s"  id="NPAMsg5Color"        begin="NPAImg1Opa.begin"             attributeName="fill"      fill="freeze"/>
+    <animate          from="1"      to="0"        dur="0.1s"  id="NPAMsg5OpaR"         begin="NPAImg1OpaR.begin"            attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="NPAMsg5Reset"        begin="NPAMsg5OpaR.end"              attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="#a5a5a5" to="#ff0000" dur="0.3s"                           begin="NPAMsg5OpaR.end"              attributeName="fill"      fill="freeze"/>
+  </circle>
+
+  <!-- Message #6 -->
+  <circle id="msg6" cx="200" cy="300" r="10" style="stroke-width:2;stroke:#000000" fill="#ff0000" opacity="0">
+    <animate          from="0"      to="1"        dur="0.1s"  id="NPAMsg6Opa"          begin="NPASendMsg.end + 20s"         attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="175 0"    dur="2s"    id="NPAMsg6Move1"        begin="NPAMsg6Opa.end"               attributeName="transform" fill="freeze" type="translate" />
+    <animateTransform from="175 0"  to="340 0"    dur="1.6s"  id="NPAMsg6Move2"        begin="NPAMsg6Move1.end"             attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="#ff0000" to="#a5a5a5" dur="0.3s"  id="NPAMsg6Color"        begin="NPAImg1Opa.begin"             attributeName="fill"      fill="freeze"/>
+    <animate          from="1"      to="0"        dur="0.1s"  id="NPAMsg6OpaR"         begin="NPAImg1OpaR.begin"            attributeName="opacity"   fill="freeze"/>
+    <animateTransform from="0 0"    to="0 0"      dur="0.1"   id="NPAMsg6Reset"        begin="NPAMsg6OpaR.end"              attributeName="transform" fill="freeze" type="translate" />
+    <animate          from="#a5a5a5" to="#ff0000" dur="0.3s"                           begin="NPAMsg5OpaR.end"              attributeName="fill"      fill="freeze"/>
+  </circle>
+
+</svg>
