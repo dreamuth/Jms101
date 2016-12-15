@@ -15,6 +15,7 @@
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/darcula.css">
     <link rel="stylesheet" href="css/base.css">
     <script>
       document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
@@ -50,29 +51,42 @@
           data-separator-notes="^Note:"
         ></section>
 
-        <section>
+        <section id="QueueHeader">
+          <h2>Queue</h2>
+        </section>
+        <section id="QueueAnimiationSection">
           <div class="animate" id="QueueAnimiation" data-svg-src="svg/Queue.svg">
             <svg height=900 class="svgComponent"/>
           </div>
         </section>
-
         <section
-          id="Queue"
+          id="QueueDetails"
           data-markdown="markdown/03-Queue.md"
           data-separator="^\n\n\n"
           data-separator-vertical="^\n\n"
           data-separator-notes="^Note:"
         ></section>
 
-        <section>
+        <section id="TopicHeader">
+          <h2>Topic</h2>
+        </section>
+        <section id="TopicAnimiationSection">
           <div class="animate" id="TopicAnimiation" data-svg-src="svg/Topic.svg">
             <svg height=900 class="svgComponent"/>
           </div>
         </section>
 
         <section
-          id="Topic"
+          id="TopicDetails"
           data-markdown="markdown/04-Topic.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Note:"
+        ></section>
+
+        <section
+          id="Coding"
+          data-markdown="markdown/04-Coding.md"
           data-separator="^\n\n\n"
           data-separator-vertical="^\n\n"
           data-separator-notes="^Note:"
@@ -94,13 +108,102 @@
           data-separator-notes="^Note:"
         ></section>
 
+        <section>
+          <section
+            id="Filters1"
+            data-noescape
+            data-markdown="markdown/07-Filters1.md"
+            data-separator="^\n\n\n"
+            data-separator-vertical="^\n\n"
+            data-separator-notes="^Note:"
+          ></section>
+
+          <section>
+            <div class="animate" id="FilterAnimiation1" data-svg-src="svg/Filter1.svg">
+              <svg height=900 class="svgComponent"/>
+            </div>
+          </section>
+
+          <section
+            id="Filters2"
+            data-noescape
+            data-markdown="markdown/07-Filters2.md"
+            data-separator="^\n\n\n"
+            data-separator-vertical="^\n\n"
+            data-separator-notes="^Note:"
+          ></section>
+
+          <section>
+            <div class="animate" id="FilterAnimiation2" data-svg-src="svg/Filter2.svg">
+              <svg height=900 class="svgComponent"/>
+            </div>
+          </section>
+
+          <section
+            id="Filters3"
+            data-noescape
+            data-markdown="markdown/07-Filters3.md"
+            data-separator="^\n\n\n"
+            data-separator-vertical="^\n\n"
+            data-separator-notes="^Note:"
+          ></section>
+
+          <section>
+            <div class="animate" id="FilterAnimiation3" data-svg-src="svg/Filter3.svg">
+              <svg height=900 class="svgComponent"/>
+            </div>
+          </section>
+
+          <section
+            id="Filters4"
+            data-noescape
+            data-markdown="markdown/07-Filters4.md"
+            data-separator="^\n\n\n"
+            data-separator-vertical="^\n\n"
+            data-separator-notes="^Note:"
+          ></section>
+
+          <section>
+            <div class="animate" id="FilterAnimiation4" data-svg-src="svg/Filter4.svg">
+              <svg height=900 class="svgComponent"/>
+            </div>
+          </section>
+
+          <section
+            id="Filters5"
+            data-noescape
+            data-markdown="markdown/07-Filters5.md"
+            data-separator="^\n\n\n"
+            data-separator-vertical="^\n\n"
+            data-separator-notes="^Note:"
+          ></section>
+
+        </section>
+
         <section
-          id="MessageSelectors"
-          data-markdown="markdown/07-MessageSelectors.md"
+          id="GroupMsgsGroup"
+          data-markdown="markdown/08-GroupMsgs.md"
           data-separator="^\n\n\n"
           data-separator-vertical="^\n\n"
           data-separator-notes="^Note:"
         ></section>
+
+        <section id="MsgDeliveryMode">
+          <section id="MsgDeliveryModeHeader">
+            <h2>Delivery Mode</h2>
+          </section>
+          <section>
+            <div class="animate" id="NPAnimiation" data-svg-src="svg/NonPersistent.svg">
+              <svg height=900 class="svgComponent"/>
+            </div>
+          </section>
+
+          <section>
+            <div class="animate" id="PAnimiation" data-svg-src="svg/Persistent.svg">
+              <svg height=900 class="svgComponent"/>
+            </div>
+          </section>
+        </section>
 
         <section
           id="DesignPatterns"
@@ -129,7 +232,7 @@
       Reveal.initialize({
         controls: true,
         progress: true,
-    	  slideNumber: true,
+        slideNumber: true,
         history: true,
         center: true,
         anything: [
@@ -173,11 +276,11 @@
         dependencies: [
           { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-        	{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'reveal.js/plugin/anything/anything.js' },
           { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-        	{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-        	{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
       });
     </script>
