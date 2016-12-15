@@ -150,6 +150,7 @@ Transacted | Rollback and Redelivery controls
 ```java
     MessageProducer producer = session.createProducer(
         context.lookupTopic("TopicName"));
+
     MessageConsumer consumer = session.createConsumer(
         context.lookupQueue("QueueName"));
 ```

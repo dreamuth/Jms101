@@ -4,7 +4,7 @@
 // Create Consumer for request message id
 MessageConsumer consumer = session.createConsumer(
     context.lookupQueue("res Q"),
-    "JMSCorrelationID = '" + requestMessage.getJMSMessageID() + "'")
+    "JMSCorrelationID = '" + requestMessage.getJMSMessageID() + "'");
 
 // Receive response
 ```
@@ -13,6 +13,7 @@ MessageConsumer consumer = session.createConsumer(
 
 #### Message Selectors
 ### More Examples
+<!-- .element: class="fragment" -->
 ```java
 String selector1 = "NumberOfOrders > 1";
 
