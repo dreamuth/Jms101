@@ -32,6 +32,9 @@ module.exports = function(grunt) {
 		},
 
 		sass: {
+			options: {
+				implementation: require('sass'),
+			},
 			core: {
 				files: {
 					'css/reveal.css': 'css/reveal.scss',
