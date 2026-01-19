@@ -7,7 +7,14 @@ This presentation will cover all of the entry level concepts needed to start usi
 ## Slide instructions
 This is an html5 presentation that uses the [reveal.js](https://github.com/hakimel/reveal.js/) presentation framework.
 
-To use this particular presentation you need to host it in a web server to see the slide.  The **serve.bat** script in the repo can be used to start a Python webserver that would then allow the slides to be accessed from [http://localhost:8000/](http://localhost:8000/).
-
-This presentation can also be accessed from
+### Viewing the presentation
+This presentation is automatically deployed to GitHub Pages and can be accessed at:
 https://dreamuth.github.io/Jms101/
+
+### Local development
+To run the presentation locally:
+1. Start a web server in the project root directory (e.g., `python -m http.server 8000`)
+2. Open your browser to [http://localhost:8000/](http://localhost:8000/)
+
+### Deployment
+The presentation is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to the `master` branch. The workflow builds the reveal.js assets and deploys the entire repository to GitHub Pages.
